@@ -29,13 +29,13 @@ Thing(SPRITE_SHEET_2, direction) {
 	this->velocity  = 750;
 	this->clipping  = Main_Resource->clip_bullets[0];
 	this->position  = SDL_Rect{
-		x - (clipping.w/2),
-		y - (clipping.h/2),
+		0,
+		0,
 		this->clipping.w,
 		this->clipping.h
 	};
-	this->xPosition = this->position.x;
-	this->yPosition = this->position.y;
+	this->xPosition = x;
+	this->yPosition = y;
 	
 	this->whosBullet = ship;
 }
@@ -45,6 +45,10 @@ Bullet::~Bullet() {}
 
 
 void Bullet::render() {
+	// Get position of player RELATIVE to camera
+	position.x = xPosition - Main_Window->getCamera().x;
+	position.y = yPosition - Main_Window->getCamera().y;
+	
 	SDL_RenderCopyEx(
 		Main_Window->getRenderer(),
 		texture,
