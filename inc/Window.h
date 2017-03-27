@@ -55,6 +55,7 @@ public:
 	
 	void renderBackGround(); ///< Renders the background respect to the camera
 	
+	inline SDL_Rect getCamera();
 	inline SDL_Window* getWindow();     ///< Get the current Window
 	inline SDL_Renderer* getRenderer(); ///< Get the current Window's renderer
 	inline Player* getPlayerShip();     ///< Get the Player's Ship
@@ -77,7 +78,9 @@ private:
 	void clear(); ///< clear the renderer
 };
 
-
+inline
+SDL_Rect Window::getCamera()
+	{ return camera; }
 
 inline
 SDL_Window* Window::getWindow()

@@ -51,6 +51,9 @@ void Thing::render() {
 		clipping.y = (explosionCounter / 9) * 100;
 	}
 	
+	position.x -= Main_Window->getCamera().x;
+	position.y -= Main_Window->getCamera().y;
+	
 	SDL_RenderCopyEx(
 		Main_Window->getRenderer(),
 		texture,
@@ -60,6 +63,9 @@ void Thing::render() {
 		NULL,
 		SDL_FLIP_VERTICAL
 	);
+	
+	position.x += Main_Window->getCamera().x;
+	position.y += Main_Window->getCamera().y;
 }
 
 

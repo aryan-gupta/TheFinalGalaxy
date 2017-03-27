@@ -37,8 +37,8 @@ Ship(SPRITE_SHEET_2, 0.0) {
 	clipping = Main_Resource->clip_playerShips[PLAYER_SHIP_1];
 	
 	position = SDL_Rect {
-		SCRN_W/2 - clipping.w/2,
-		SCRN_H/2 - clipping.h/2,
+		0,//MAP_W/2 - clipping.w/2,
+		0,//MAP_H/2 - clipping.h/2,
 		clipping.w,
 		clipping.h
 	};
@@ -162,9 +162,11 @@ void Player::turnOnShield() {
 }
 
 
-void Player::centerCamOverUs(int& x, int&y) {
-	x = (xPosition + clipping.h/2) - SCRN_W/2;
-	y = (yPosition + clipping.h/2) - SCRN_H/2;
+void Player::centerCamOverUs(int& x, int& y) {
+	x = xPosition - (SCRN_W/2) + (clipping.w/2);
+	y = yPosition - (SCRN_H/2) + (clipping.h/2);
+	//LOGL(x << "        " << y)
+	//LOGL(SCRN_H/2 << "        " << SCRN_W/2)
 }
 
 

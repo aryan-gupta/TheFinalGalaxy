@@ -27,8 +27,8 @@
 #include ".\inc\Player.h"
 #include ".\inc\Resources.h"
 
-const int MAP_W = 2000;
-const int MAP_H = 2000;
+const int MAP_W = 5000;
+const int MAP_H = 5000;
 
 int SCRN_W, SCRN_H;
 
