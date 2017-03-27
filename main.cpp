@@ -83,6 +83,10 @@ int main(int argc, char* argv[]) {
 					case SDLK_SPACE:
 						playerShip->fire();
 					break;
+					
+					case SDLK_ESCAPE:
+						quit(0x02);
+					break;
 				}
 			}
 			
