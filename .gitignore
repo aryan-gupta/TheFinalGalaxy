@@ -1,3 +1,8 @@
+# Folders
+bin/
+obj/
+docs/
+
 # Compiled Object files
 *.slo
 *.lo
