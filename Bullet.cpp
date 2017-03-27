@@ -34,8 +34,8 @@ Thing(SPRITE_SHEET_2, direction) {
 		this->clipping.w,
 		this->clipping.h
 	};
-	this->xPosition = x;
-	this->yPosition = y;
+	this->xPosition = x - (clipping.w/2);
+	this->yPosition = y - (clipping.h/2);
 	
 	this->whosBullet = ship;
 }
