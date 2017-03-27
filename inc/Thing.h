@@ -58,7 +58,7 @@ protected:
 	double xPosition;     ///< Internal x position of the Thing
     double yPosition;     ///< Internal y position of the Thing
 	
-	SDL_Rect position; ///< SDL_Rect position of the Thing
+	SDL_Rect position; ///< SDL_Rect position of the Thing RELITIVE to the camera
 	
 	/// @brief SDL_Rect clipping of the Thing
 	/// @note Copied from \ref Resources struct
@@ -73,10 +73,6 @@ protected:
 	SDL_Texture* explosion; ///< Pointer to the texture in \ref Resources for the explosion
 	bool isExploding;       ///< Is the Thing exploding
 	int explosionCounter;   ///< Counts/times the explosion to decide which clipping to use
-	
-	/// @brief Updates the SDL_Rect \ref position of the Thing
-	/// @warning Must be run after xPosition and yPosition is changed
-	void updatePosition();
 	
 	/// @brief Destroys this thing
 	/// @warning pure virtual function - Must be defined in Base Class

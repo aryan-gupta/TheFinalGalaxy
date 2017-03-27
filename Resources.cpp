@@ -30,7 +30,7 @@ const char* SPRITE_RES[] = {
 };
 
 const char* EXPLOSION_RES    = "..\\res\\other\\explosion.png";
-const char* BACKGROUND_IMAGE = "..\\res\\other\\background.jpg";
+const char* BACKGROUND_IMAGE = "..\\res\\other\\background.png";
 const char* MAIN_FONT        = "..\\res\\other\\main_font.ttf";
 const char* BRIEF_FONT       = "..\\res\\other\\brief_font.ttf";
 const char* TITLE_FONT       = "..\\res\\other\\title_font.ttf";

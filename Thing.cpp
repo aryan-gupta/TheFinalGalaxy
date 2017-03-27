@@ -51,6 +51,10 @@ void Thing::render() {
 		clipping.y = (explosionCounter / 9) * 100;
 	}
 	
+	// Get position of player RELATIVE to camera
+	position.x = xPosition - Main_Window->getCamera().x;
+	position.y = yPosition - Main_Window->getCamera().y;
+	
 	SDL_RenderCopyEx(
 		Main_Window->getRenderer(),
 		texture,
@@ -78,7 +82,6 @@ void Thing::move(uint32_t time) {
 	yPosition -= cos((360 - direction) * M_PI/180) * velocity * (time/1000.0);
 	
 	keepInMap();
-	updatePosition();
 }
 
 
@@ -100,17 +103,12 @@ void Thing::keepInMap() {
 	if(xPosition < 0)
 		xPosition = 0;
 	
-	if((xPosition + position.w) > SCRN_W) 
-		xPosition = SCRN_W - clipping.w;
+	if((xPosition + position.w) > MAP_W) 
+		xPosition = MAP_W - clipping.w;
 	
 	if(yPosition < 0) 
 		yPosition = 0;
 	
-	if((yPosition + position.h) > SCRN_H) 
-		yPosition = SCRN_H - clipping.h;
-}
-
-void Thing::updatePosition() {
-	position.x = (int)xPosition;
-	position.y = (int)yPosition;
+	if((yPosition + position.h) > MAP_H) 
+		yPosition = MAP_H - clipping.h;
 }
