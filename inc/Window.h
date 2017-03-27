@@ -51,6 +51,10 @@ public:
 	
 	void createEnemyShip(); ///< Creates an \ref Enemy ship
 	
+	void moveCamera(); ///< Moves the camera respect the \ref Player's Movement
+	
+	void renderBackGround(); ///< Renders the background respect to the camera
+	
 	inline SDL_Window* getWindow();     ///< Get the current Window
 	inline SDL_Renderer* getRenderer(); ///< Get the current Window's renderer
 	inline Player* getPlayerShip();     ///< Get the Player's Ship
@@ -59,6 +63,10 @@ public:
 protected:
 	SDL_Window* window;     ///< Stores our main Window
 	SDL_Renderer* renderer; ///< Stores our main renderer
+	
+	SDL_Texture* background; ///< The background texture, Points to texture in \ref Resources
+	
+	SDL_Rect camera; ///< Stores the location of the camera respect to MAP height and width
 	
 	std::vector<Ship*> enemyShips;      ///< All the enemy ships
 	std::vector<Bullet*> enemyBullets;  ///< All the enemy's \ref Bullet

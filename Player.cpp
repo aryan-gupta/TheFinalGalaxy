@@ -162,7 +162,14 @@ void Player::turnOnShield() {
 }
 
 
+void Player::centerCamOverUs(int& x, int&y) {
+	x = (xPosition + clipping.h/2) - SCRN_W/2;
+	y = (yPosition + clipping.h/2) - SCRN_H/2;
+}
+
+
 Powerup* Player::getPowerup() {
+
 	return nullptr;
 }
 

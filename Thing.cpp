@@ -100,14 +100,14 @@ void Thing::keepInMap() {
 	if(xPosition < 0)
 		xPosition = 0;
 	
-	if((xPosition + position.w) > SCRN_W) 
-		xPosition = SCRN_W - clipping.w;
+	if((xPosition + position.w) > MAP_W) 
+		xPosition = MAP_W - clipping.w;
 	
 	if(yPosition < 0) 
 		yPosition = 0;
 	
-	if((yPosition + position.h) > SCRN_H) 
-		yPosition = SCRN_H - clipping.h;
+	if((yPosition + position.h) > MAP_H) 
+		yPosition = MAP_H - clipping.h;
 }
 
 void Thing::updatePosition() {
