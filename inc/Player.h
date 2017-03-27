@@ -51,33 +51,35 @@ public:
 	void turnOnDoubleFire(); ///< Turns on double fire
 	void turnOnShield();     ///< Turns on shield
 	
+	void centerCamOverUs(int& x, int& y);
+	
 	/// @brief Moves based on time
 	/// @param [in] time `uint32_t` the amount of time passed from the last move call
 	virtual void move(uint32_t time);
 	
-	
 	virtual void fire();   ///< Fires a bullet
 	virtual void render(); ///< Renders the player
 protected:
-	SDL_Texture* shieldTexture;
-	SDL_Rect shieldClipping;
-	SDL_Rect shieldPosition;
-	bool hasShield;
-	int shieldCounter;
+	SDL_Texture* shieldTexture; ///< Texture for the Shield
+	SDL_Rect shieldClipping;    ///< Clipping for the shield
+	SDL_Rect shieldPosition;    ///< Position of the Shield relative to the Player
+	bool hasShield;             ///< Does the Player have a Shield
+	int shieldCounter;          ///< Counter for the Player's Shield
 	
-	bool hasRapidFire;
-	int RFcounter;
+	///@todo Change power-ups in to bool array
+	bool hasRapidFire; ///< Does the Player have Rapid Fire
+	int RFcounter;     ///< Counter for Rapid fire
 	
-	bool hasDoubleFire;
-	int DFcounter;
+	bool hasDoubleFire; ///< Does the Player have Double Fire
+	int DFcounter;      ///< Counter for the Double Fire
 	
-	double turnVelocity;
+	double turnVelocity; ///< The turning velocity for the ship
 	
-	Powerup* getPowerup();
-	void turn(uint32_t time);
+	Powerup* getPowerup();    ///< Gets the closest power-up to the player
+	void turn(uint32_t time); ///< turns a certain amount depending on the amount of time passed
 	
-	virtual void destroy();
-	virtual void checkHit();
+	virtual void destroy();  ///< Removed the Player from the map
+	virtual void checkHit(); ///< Checks if a Bullet has hit it or not
 private:
 };
 

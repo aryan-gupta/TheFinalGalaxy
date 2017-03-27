@@ -23,44 +23,50 @@
 #include <stdint.h>
 
 #include ".\main.h"
-
+// Class Forward Declarations
 class Ship;
 class Player;
 class Bullet;
 class Enemy;
 
-extern int SCRN_W;
-extern int SCRN_H;
+extern int SCRN_W; ///< The width of the screen
+extern int SCRN_H; ///< The height of the screen
 
+/// @brief Our window class
+/// This class holds all of our window information, is used for rendering,
+/// and more
 class Window {
 public:
 	Window();
 	~Window();
 	
+	/// @brief initializes all the variables in our window
+	/// The variables aren't done in the constructor because many of the
+	/// variables used in this class need to be accessed after the main window 
+	/// is created, but after the window is set up
 	void initWindow();
 	
-	void moveAll(uint32_t time);
-	void renderAll();
-	void createEnemyShip();
+	void moveAll(uint32_t time); ///< Moves all the objects on the screen @sa Thing::render()
+	void renderAll(); ///< Renders all of the objects on the screen
 	
-	inline SDL_Window* getWindow();
-	inline SDL_Renderer* getRenderer();
-	inline Player* getPlayerShip();
-	inline std::vector<Bullet*>& getEnemyBullets();
-	inline void addPlayerBullet(Bullet* bullet);
+	void createEnemyShip(); ///< Creates an \ref Enemy ship
+	
+	inline SDL_Window* getWindow();     ///< Get the current Window
+	inline SDL_Renderer* getRenderer(); ///< Get the current Window's renderer
+	inline Player* getPlayerShip();     ///< Get the Player's Ship
+	inline std::vector<Bullet*>& getEnemyBullets(); ///< Get the enemy's Bullet
+	inline void addPlayerBullet(Bullet* bullet);    ///< Add a Player's bullet
 protected:
 	SDL_Window* window;     ///< Stores our main Window
 	SDL_Renderer* renderer; ///< Stores our main renderer
 	
-	std::vector<Ship*> enemyShips;
-	std::vector<Bullet*> enemyBullets;
-	std::vector<Bullet*> playerBullets;
+	std::vector<Ship*> enemyShips;      ///< All the enemy ships
+	std::vector<Bullet*> enemyBullets;  ///< All the enemy's \ref Bullet
+	std::vector<Bullet*> playerBullets; ///< All the player's \ref Bullet
 	
-	Player* playerShip;
+	Player* playerShip; /// The \ref Player's Ship
 private:
-	void clear();
-	void renderAllBullets();
-	void moveAllBullets(uint32_t time);
+	void clear(); ///< clear the renderer
 };
 
 
