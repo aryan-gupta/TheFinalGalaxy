@@ -37,8 +37,8 @@ Ship(SPRITE_SHEET_2, 0.0) {
 	clipping = Main_Resource->clip_playerShips[PLAYER_SHIP_1];
 	
 	position = SDL_Rect {
-		0,//MAP_W/2 - clipping.w/2,
-		0,//MAP_H/2 - clipping.h/2,
+		MAP_W/2 - clipping.w/2,
+		MAP_H/2 - clipping.h/2,
 		clipping.w,
 		clipping.h
 	};
@@ -56,7 +56,7 @@ Ship(SPRITE_SHEET_2, 0.0) {
 
 
 Player::~Player() {
-	
+	quit(0x44);
 }
 
 
@@ -165,8 +165,6 @@ void Player::turnOnShield() {
 void Player::centerCamOverUs(int& x, int& y) {
 	x = xPosition - (SCRN_W/2) + (clipping.w/2);
 	y = yPosition - (SCRN_H/2) + (clipping.h/2);
-	//LOGL(x << "        " << y)
-	//LOGL(SCRN_H/2 << "        " << SCRN_W/2)
 }
 
 
@@ -182,9 +180,9 @@ void Player::destroy() {
 
 
 void Player::checkHit() {
-	vector<Bullet*>& enemyBullet = Main_Window->getEnemyBullets();
+	vector<Bullet*>& bullets = Main_Window->getEnemyBullets();
 	
-	for(auto b : enemyBullet) {
+	for(auto b : bullets) {
 		if(checkCollision(b->getPosition(), this->position)) {
 			b->explode();
 			this->explode();

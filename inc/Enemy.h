@@ -18,14 +18,20 @@
 #ifndef ENEMY_H_INC
 #define ENEMY_H_INC
 
+#include ".\Ship.h"
+
 class Enemy : public Ship {
 public:
 	Enemy();
-	~Enemy();
+	virtual ~Enemy();
 	
-	virtual void move();
+	void turn(int degrees);
+	
+	virtual void move(uint32_t time);
+	virtual void fire();
 protected:
-	bool atShield();
+	virtual void destroy();
+	virtual void checkHit();
 private:
 };
 

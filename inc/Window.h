@@ -59,8 +59,10 @@ public:
 	inline SDL_Window* getWindow();     ///< Get the current Window
 	inline SDL_Renderer* getRenderer(); ///< Get the current Window's renderer
 	inline Player* getPlayerShip();     ///< Get the Player's Ship
-	inline std::vector<Bullet*>& getEnemyBullets(); ///< Get the enemy's Bullet
+	inline std::vector<Bullet*>& getEnemyBullets();  ///< Get the enemy's Bullet
+	inline std::vector<Bullet*>& getPlayerBullets();
 	inline void addPlayerBullet(Bullet* bullet);    ///< Add a Player's bullet
+	inline void addEnemyBullet(Bullet* bullet);
 protected:
 	SDL_Window* window;     ///< Stores our main Window
 	SDL_Renderer* renderer; ///< Stores our main renderer
@@ -99,7 +101,15 @@ std::vector<Bullet*>& Window::getEnemyBullets()
 	{ return enemyBullets; }
 	
 inline
+std::vector<Bullet*>& Window::getPlayerBullets() 
+	{ return playerBullets; }
+	
+inline
 void Window::addPlayerBullet(Bullet* bullet)
 	{ playerBullets.push_back(bullet); }
+	
+inline
+void Window::addEnemyBullet(Bullet* bullet)
+	{ enemyBullets.push_back(bullet); }
 	
 #endif
