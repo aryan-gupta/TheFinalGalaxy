@@ -26,7 +26,7 @@ using std::vector;
 #include ".\inc\Bullet.h"
 
 const int TURN_SEED = 50;
-const int FIRE_SEED = 50;
+const int FIRE_SEED = 500;
 
 Enemy::Enemy():
 Ship(SPRITE_SHEET_1, (rand() % 360)) {
@@ -55,9 +55,11 @@ void Enemy::move(uint32_t time) {
 		turn((rand() % 20) - 10);
 }
 
+
 void Enemy::turn(int degrees) {
 	direction =+ degrees;
 }
+
 
 void Enemy::fire() {
 	Main_Window->addEnemyBullet(new Bullet(
@@ -68,7 +70,11 @@ void Enemy::fire() {
 	));
 }
 
-void Enemy::destroy() {}
+
+void Enemy::destroy() {
+	//delete this;
+}
+
 
 void Enemy::checkHit() {
 	vector<Bullet*>& bullets = Main_Window->getPlayerBullets();

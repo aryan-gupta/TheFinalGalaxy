@@ -56,7 +56,7 @@ Ship(SPRITE_SHEET_2, 0.0) {
 
 
 Player::~Player() {
-	
+	quit(0x44);
 }
 
 
@@ -165,8 +165,6 @@ void Player::turnOnShield() {
 void Player::centerCamOverUs(int& x, int& y) {
 	x = xPosition - (SCRN_W/2) + (clipping.w/2);
 	y = yPosition - (SCRN_H/2) + (clipping.h/2);
-	//LOGL(x << "        " << y)
-	//LOGL(SCRN_H/2 << "        " << SCRN_W/2)
 }
 
 

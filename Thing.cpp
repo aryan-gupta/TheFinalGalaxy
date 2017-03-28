@@ -69,7 +69,7 @@ void Thing::render() {
 
 void Thing::move(uint32_t time) {
 	if(explosionCounter >= 80)
-		destroy();
+		return;
 	
 	if(isExploding) {
 		explosionCounter++;

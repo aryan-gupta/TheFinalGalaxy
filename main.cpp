@@ -27,13 +27,13 @@
 #include ".\inc\Player.h"
 #include ".\inc\Resources.h"
 
-const int MAP_W = 5000;
-const int MAP_H = 5000;
+const int MAP_W = 2000;
+const int MAP_H = 2000;
 
 int SCRN_W, SCRN_H;
 
 const int MAX_FPS = 45;
-const int ENEMY_SEED = 100;
+const int ENEMY_SEED = 40;
 
 Resources* Main_Resource;
 Window*    Main_Window;
