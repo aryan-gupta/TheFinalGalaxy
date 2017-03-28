@@ -55,12 +55,14 @@ public:
 	
 	void renderBackGround(); ///< Renders the background respect to the camera
 	
-	inline SDL_Rect getCamera();
-	inline SDL_Window* getWindow();     ///< Get the current Window
-	inline SDL_Renderer* getRenderer(); ///< Get the current Window's renderer
-	inline Player* getPlayerShip();     ///< Get the Player's Ship
+	inline SDL_Rect              getCamera();
+	inline SDL_Window*           getWindow();     ///< Get the current Window
+	inline SDL_Renderer*         getRenderer(); ///< Get the current Window's renderer
+	inline Player*               getPlayerShip();     ///< Get the Player's Ship
+	inline auto getEnemyShips();
 	inline std::vector<Bullet*>& getEnemyBullets();  ///< Get the enemy's Bullet
 	inline std::vector<Bullet*>& getPlayerBullets();
+	
 	inline void addPlayerBullet(Bullet* bullet);    ///< Add a Player's bullet
 	inline void addEnemyBullet(Bullet* bullet);
 protected:
@@ -71,7 +73,7 @@ protected:
 	
 	SDL_Rect camera; ///< Stores the location of the camera respect to MAP height and width
 	
-	std::vector<Ship*> enemyShips;      ///< All the enemy ships
+	std::vector<Enemy*> enemyShips;      ///< All the enemy ships
 	std::vector<Bullet*> enemyBullets;  ///< All the enemy's \ref Bullet
 	std::vector<Bullet*> playerBullets; ///< All the player's \ref Bullet
 	
@@ -96,6 +98,10 @@ inline
 Player* Window::getPlayerShip()
 	{ return playerShip; }
 
+inline
+auto Window::getEnemyShips()
+	{ return enemyShips; }
+	
 inline
 std::vector<Bullet*>& Window::getEnemyBullets() 
 	{ return enemyBullets; }

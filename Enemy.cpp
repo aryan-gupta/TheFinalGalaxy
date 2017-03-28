@@ -48,11 +48,11 @@ Ship(SPRITE_SHEET_1, (rand() % 360)) {
 Enemy::~Enemy() {}
 
 void Enemy::move(uint32_t time) {
-	Thing::move(time);
 	if(rand() % FIRE_SEED == 0)
 		fire();
 	if(rand() % TURN_SEED == 0)
 		turn((rand() % 20) - 10);
+	Thing::move(time);
 }
 
 
@@ -72,7 +72,12 @@ void Enemy::fire() {
 
 
 void Enemy::destroy() {
-	//delete this;
+	auto ships = Main_Window->getEnemyShips();
+	for(unsigned i = 0; i < ships.size(); ++i)
+		if(this == ships[i])
+			ships.erase(ships.begin() + i);
+			
+	delete this;
 }
 
 
