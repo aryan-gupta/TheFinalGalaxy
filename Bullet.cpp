@@ -88,3 +88,16 @@ void Bullet::destroy() {
 void Bullet::checkHit() {
 	
 }
+
+
+bool Bullet::atEdgeOfMap() {
+	if(
+	       (xPosition <= 0)
+		|| (xPosition + position.w) >= MAP_W
+		|| (yPosition <= 0) 
+		|| (yPosition + position.h) >= MAP_H 
+	) {
+		return true;
+	}
+	return false;
+}
