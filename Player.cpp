@@ -56,7 +56,7 @@ Ship(SPRITE_SHEET_2, 0.0) {
 
 
 Player::~Player() {
-	quit(0x44);
+	//quit(0x44);
 }
 
 
@@ -104,15 +104,16 @@ void Player::setMoving(Direction direction) {
 }
 
 
-void Player::move(uint32_t time) {
-	Thing::move(time);
-	turn(time);
-	
+void Player::move(uint32_t time) {	
 	if(hasShield) {
 		double dirInRads = (360 - direction) * M_PI/180;
 		shieldPosition.x -= sin(dirInRads) * velocity * (time/1000.0);
 		shieldPosition.y -= cos(dirInRads) * velocity * (time/1000.0);
+	
 	}
+	
+	turn(time);
+	Thing::move(time);
 }
 
 
@@ -169,7 +170,6 @@ void Player::centerCamOverUs(int& x, int& y) {
 
 
 Powerup* Player::getPowerup() {
-
 	return nullptr;
 }
 

@@ -62,16 +62,17 @@ void Bullet::render() {
 
 
 void Bullet::destroy() {
-	vector<Bullet*>& enemyBullets = Main_Window->getEnemyBullets();
-	for(unsigned i = 0; i < enemyBullets.size(); ++i) {
-		if(this == enemyBullets[i])
-			enemyBullets.erase(enemyBullets.begin() + i);
+	auto bullets = Main_Window->getEnemyBullets();
+	for(unsigned i = 0; i < bullets.size(); ++i) {
+		if(this == bullets[i])
+			bullets.erase(bullets.begin() + i);
 	}
 	
-	// for(unsigned i = 0; i < Main_Window->enemyBullets.size(); ++i) {
-		// if(this == Main_Window->enemyBullets[i])
-			// Main_Window->enemyBullets.erase(Main_Window->enemyBullets.begin() + i);
-	// }
+	bullets = Main_Window->getPlayerBullets();
+	for(unsigned i = 0; i < bullets.size(); ++i) {
+		if(this == bullets[i])
+			bullets.erase(bullets.begin() + i);
+	}
 	
 	delete this;
 }
