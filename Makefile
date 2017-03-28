@@ -38,7 +38,8 @@ L_SDLS = -lmingw32 -lSDL2main -lSDL2  -mwindows  -Wl,--no-undefined -lm -ldinput
 CFLAGS = $(DEBUG) -Wall -std=c++17 -c
 LFLAGS = $(DEBUG) -Wall
 OS = $(OBJ)\main.o $(OBJ)\res.o $(OBJ)\Ship.o $(OBJ)\Window.o \
-		$(OBJ)\Resources.o $(OBJ)\Thing.o $(OBJ)\Player.o $(OBJ)\Bullet.o
+		$(OBJ)\Resources.o $(OBJ)\Thing.o $(OBJ)\Player.o $(OBJ)\Bullet.o \
+		$(OBJ)\Enemy.o 
 #		$(OBJ)\Powerup.o
 
 # ============================ RECEM_PIES ========================================
@@ -54,6 +55,9 @@ $(OBJ)\Ship.o: .\Ship.cpp $(H)\Ship.h $(H)\Thing.h
 
 $(OBJ)\Player.o: .\Player.cpp $(H)\Player.h $(H)\Ship.h $(H)\Thing.h
 	$(CC) .\Player.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
+	
+$(OBJ)\Enemy.o: .\Enemy.cpp $(H)\Enemy.h $(H)\Ship.h $(H)\Thing.h
+	$(CC) .\Enemy.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
 	
 $(OBJ)\Window.o: .\Window.cpp $(H)\Window.h
 	$(CC) .\Window.cpp -o .\$@ $(CFLAGS) $(L_SDLC)

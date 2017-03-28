@@ -68,8 +68,6 @@ void Thing::render() {
 
 
 void Thing::move(uint32_t time) {
-	checkHit();
-	
 	if(explosionCounter >= 80)
 		destroy();
 	
@@ -77,6 +75,8 @@ void Thing::move(uint32_t time) {
 		explosionCounter++;
 		return;
 	}
+	
+	checkHit();
 	
 	xPosition -= sin((360 - direction) * M_PI/180) * velocity * (time/1000.0);
 	yPosition -= cos((360 - direction) * M_PI/180) * velocity * (time/1000.0);

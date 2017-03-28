@@ -33,7 +33,7 @@ const int MAP_H = 5000;
 int SCRN_W, SCRN_H;
 
 const int MAX_FPS = 45;
-const int ENEMY_SEED = 10;
+const int ENEMY_SEED = 100;
 
 Resources* Main_Resource;
 Window*    Main_Window;
@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
 	while(true) {
 		FPS_Timer = SDL_GetTicks();
 		
-		if(rand() % (MAX_FPS * ENEMY_SEED))
+		if(rand() % ENEMY_SEED == 0)
 			Main_Window->createEnemyShip();
 		
 		Main_Window->moveAll(SDL_GetTicks() - moveTimer);

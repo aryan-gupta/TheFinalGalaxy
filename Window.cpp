@@ -23,7 +23,7 @@
 #include ".\inc\Window.h"
 #include ".\inc\Player.h"
 #include ".\inc\Bullet.h"
-//#include ".\inc\Enemy.h"
+#include ".\inc\Enemy.h"
 
 Window::Window() {
 	SDL_DisplayMode mode;
@@ -73,10 +73,9 @@ void Window::initWindow() {
 void Window::moveAll(uint32_t time) {
 	playerShip->move(time);
 	
-	for(auto b : enemyBullets)
-		b->move(time);
-	for(auto b : playerBullets)
-		b->move(time);
+	for(auto e : enemyBullets)  e->move(time);
+	for(auto e : playerBullets) e->move(time);
+	for(auto e : enemyShips)    e->move(time);
 	
 	
 }
@@ -88,10 +87,10 @@ void Window::renderAll() {
 	renderBackGround();
 	
 	playerShip->render();
-	for(auto b : enemyBullets)
-		b->render();
-	for(auto b : playerBullets)
-		b->render();
+	
+	for(auto e : enemyBullets)  e->render();
+	for(auto e : playerBullets) e->render();
+	for(auto e : enemyShips)    e->render();
 	
 	SDL_RenderPresent(renderer);
 }
@@ -104,7 +103,7 @@ void Window::clear() {
 
 
 void Window::createEnemyShip() { 
-	//enemyShips.push_back(new Enemy());
+	enemyShips.push_back(new Enemy());
 }
 
 
