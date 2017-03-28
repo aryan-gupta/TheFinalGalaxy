@@ -67,7 +67,7 @@ void Thing::render() {
 }
 
 
-void Thing::move(uint32_t time) {	
+void Thing::move(uint32_t time) {
 	if(isExploding) {
 		explosionCounter++;
 		return;
@@ -79,7 +79,7 @@ void Thing::move(uint32_t time) {
 	keepInMap();
 	checkHit();
 	
-	if(explosionCounter >= 80) {
+	if(explosionCounter >= 80) { // This if statement
 		destroy();
 		return;
 	}
@@ -87,6 +87,9 @@ void Thing::move(uint32_t time) {
 
 
 void Thing::explode() {
+	if(isExploding) // if already exploding, dont do anything
+		return;
+	
 	isExploding = true;
 	explosionCounter = 0;
 	

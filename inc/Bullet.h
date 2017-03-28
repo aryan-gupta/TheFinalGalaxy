@@ -23,8 +23,9 @@
 class Bullet : public Thing {
 public:
 	Bullet(double direction, int x, int y, Shooters ship);
-	~Bullet();
+	virtual ~Bullet();
 	
+	virtual void move(uint32_t time);
 	virtual void render();
 protected:
 	virtual void destroy();

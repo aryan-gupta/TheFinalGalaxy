@@ -59,7 +59,7 @@ public:
 	inline SDL_Window*           getWindow();     ///< Get the current Window
 	inline SDL_Renderer*         getRenderer(); ///< Get the current Window's renderer
 	inline Player*               getPlayerShip();     ///< Get the Player's Ship
-	inline auto getEnemyShips();
+	inline std::vector<Enemy* >& getEnemyShips();
 	inline std::vector<Bullet*>& getEnemyBullets();  ///< Get the enemy's Bullet
 	inline std::vector<Bullet*>& getPlayerBullets();
 	
@@ -99,7 +99,7 @@ Player* Window::getPlayerShip()
 	{ return playerShip; }
 
 inline
-auto Window::getEnemyShips()
+std::vector<Enemy*>& Window::getEnemyShips()
 	{ return enemyShips; }
 	
 inline

@@ -44,6 +44,13 @@ Thing(SPRITE_SHEET_2, direction) {
 Bullet::~Bullet() {}
 
 
+void Bullet::move(uint32_t time) {
+	if(atEdgeOfMap())
+		destroy();
+	Thing::move(time);
+}
+
+
 void Bullet::render() {
 	// Get position of player RELATIVE to camera
 	position.x = xPosition - Main_Window->getCamera().x;
