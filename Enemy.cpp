@@ -30,7 +30,7 @@ const int FIRE_SEED = 500;
 
 Enemy::Enemy():
 Ship(SPRITE_SHEET_1, (rand() % 360)) {
-	velocity = 200;
+	velocity = 250;
 	
 	clipping = Main_Resource->clip_enemyShips[0];
 	
