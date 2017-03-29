@@ -51,8 +51,10 @@ public:
 	void turnOnDoubleFire(); ///< Turns on double fire
 	void turnOnShield();     ///< Turns on shield
 	
+	/// @brief Centers the camera over us
+	/// @param [out] `int&` The x coordinate to store the new Camera x position
+	/// @param [out] `int&` The y coordinate to store the new Camera y position
 	void centerCamOverUs(int& x, int& y);
-	
 	
 	/// @brief Moves based on time
 	/// @param [in] time `uint32_t` the amount of time passed from the last move call
@@ -68,7 +70,7 @@ protected:
 	int shieldCounter;          ///< Counter for the Player's Shield
 	SDL_Point shieldCenter;
 	
-	///@todo Change power-ups in to bool array
+	///@todo Change power-ups in to bool array and enums
 	bool hasRapidFire; ///< Does the Player have Rapid Fire
 	int RFcounter;     ///< Counter for Rapid fire
 	

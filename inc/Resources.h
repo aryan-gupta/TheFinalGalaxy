@@ -27,6 +27,15 @@ extern const char* BACKGROUND_IMAGE; ///< Background image location
 extern const char* MAIN_FONT;        ///< Main font location
 extern const char* LIFE_IMAGE;       ///< Stores the image used for number of lives
 
+/// @brief The sprite sheets used in the game
+enum SpriteSheets {
+	SPRITE_SHEET_1, ///< The first sprite sheet
+	SPRITE_SHEET_2, ///< The second sprite sheet
+	SPRITE_SHEET_3, ///< The third sprite sheet
+	
+	TOTAL_SPRITE_SHEETS ///< The total sprite sheets
+};
+
 /// @brief Stores all of our resources
 /**
 	This Struct was implemented so the program doesn't have to
