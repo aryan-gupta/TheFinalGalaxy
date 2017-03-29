@@ -190,6 +190,11 @@ void Window::removeThings() {
 				enemyShips.erase(enemyShips.begin() + jj);
 			}
 		}
+		
+		if(tmpThing == playerShip) {
+			delete playerShip;
+			playerShip = new Player();
+		}
 	}
 	
 	thingsToRemove.clear();
