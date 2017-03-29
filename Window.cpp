@@ -24,6 +24,7 @@
 #include ".\inc\Player.h"
 #include ".\inc\Bullet.h"
 #include ".\inc\Enemy.h"
+#include ".\inc\Asteroid.h"
 
 Window::Window() {
 	SDL_DisplayMode mode;
@@ -113,11 +114,6 @@ void Window::clear() {
 }
 
 
-void Window::createEnemyShip() { 
-	enemyShips.push_back(new Enemy());
-}
-
-
 void Window::moveCamera() {
 	playerShip->centerCamOverUs(camera.x, camera.y);
 
@@ -198,4 +194,16 @@ void Window::removeThings() {
 	}
 	
 	thingsToRemove.clear();
+}
+
+	
+void Window::createEnemyShip() {
+	enemyShips.push_back(new Enemy());
+	//numEnemyShip++;
+}
+
+	
+void Window::createAsteroid() {
+	enemyShips.push_back(new Asteroid());
+	//numAsteroid++;
 }

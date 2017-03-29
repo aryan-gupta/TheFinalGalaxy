@@ -18,11 +18,16 @@
 #ifndef ASTROID_H_INC
 #define ASTROID_H_INC
 
-class Astroid : public Thing {
+#include ".\Thing.h"
+
+class Asteroid : public Thing {
 public: 
-
+	Asteroid();
+	virtual ~Asteroid() {}
 protected:
-
+	/// @brief checks if something has hit it
+	/// @warning pure virtual function - Must be defined in Base Class
+	virtual void checkHit();
 private:
 };
 
