@@ -30,8 +30,8 @@ public:
 	virtual void move(uint32_t time);
 	virtual void fire();
 protected:
-	virtual void destroy();
 	virtual void checkHit();
+	bool atEdgeOfMap();
 private:
 };
 

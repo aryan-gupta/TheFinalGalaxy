@@ -15,10 +15,11 @@
 # ==============================================================================
 .DEFAULT_GOAL := all
 # ==========================  CONST MACROS  ====================================
-CC = "C:\Compiler\MinGW-w64\mingw32\bin\g++.exe"
-7Z = "C:\Program Files (Portable)\7-Zip\7z.exe"
-RES = "C:\Compiler\MinGW-w64\mingw32\bin\windres.exe"
-DOXY = "C:\Compiler\doxygen\bin\doxygen.exe"
+DRIVE = C
+CC = "$(DRIVE):\Compiler\MinGW-w64\mingw32\bin\g++.exe"
+7Z = "$(DRIVE):\Program Files (Portable)\7-Zip\7z.exe"
+RES = "$(DRIVE):\Compiler\MinGW-w64\mingw32\bin\windres.exe"
+DOXY = "$(DRIVE):\Compiler\doxygen\bin\doxygen.exe"
 OBJ = .\obj
 BINDIR = .\bin
 DATDIR = .\dat
@@ -29,9 +30,9 @@ DEBUG = -g -DDEBUG=true
 # ============================  SDL LIBS  ======================================
 GRAPHICS = -w -Wl,-subsystem,windows
 # Standard SDL libs
-L_SDLC = -IC:\Compiler\SDL\include\SDL2 
-L_SDLL = -LC:\Compiler\SDL\lib -lmingw32 -lSDL2main -lSDL2 \
-							   -lSDL2_mixer  -lSDL2_ttf  -lSDL2_image
+L_SDLC = -I$(DRIVE):\Compiler\SDL\include\SDL2 
+L_SDLL = -L$(DRIVE):\Compiler\SDL\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+# -lSDL2_mixer  -lSDL2_ttf
 L_SDLS = -lmingw32 -lSDL2main -lSDL2  -mwindows  -Wl,--no-undefined -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion -luuid -static-libgcc
 
 # ==============================  MACROS  ======================================

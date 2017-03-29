@@ -53,10 +53,11 @@ public:
 	
 	void centerCamOverUs(int& x, int& y);
 	
+	
 	/// @brief Moves based on time
 	/// @param [in] time `uint32_t` the amount of time passed from the last move call
 	virtual void move(uint32_t time);
-	
+	virtual void keepInMap();
 	virtual void fire();   ///< Fires a bullet
 	virtual void render(); ///< Renders the player
 protected:
@@ -65,6 +66,7 @@ protected:
 	SDL_Rect shieldPosition;    ///< Position of the Shield relative to the Player
 	bool hasShield;             ///< Does the Player have a Shield
 	int shieldCounter;          ///< Counter for the Player's Shield
+	SDL_Point shieldCenter;
 	
 	///@todo Change power-ups in to bool array
 	bool hasRapidFire; ///< Does the Player have Rapid Fire

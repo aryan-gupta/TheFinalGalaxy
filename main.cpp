@@ -18,7 +18,6 @@
 
 #include <iostream>
 #include <SDL.h>
-#include <SDL_TTF.h>
 #include <SDL_Image.h>
 #include <time.h>
 
@@ -62,6 +61,8 @@ int main(int argc, char* argv[]) {
 		moveTimer = SDL_GetTicks();
 		
 		Main_Window->renderAll();
+		
+		Main_Window->removeThings();
 		
 		while(SDL_PollEvent(&event)) {
 			if(event.type == SDL_QUIT) {
@@ -148,8 +149,8 @@ void initSDL() {
 	if(!(IMG_Init(flags) & flags))
 		EXIT("IMG SDL Init Failed! " << IMG_GetError(), -0x101);
 	
-	if(TTF_Init() < 0) // Init TTF and text rendering
-		EXIT("TTF SDL Init Failed! " << TTF_GetError(), -0x101);
+	// if(TTF_Init() < 0) // Init TTF and text rendering
+		// EXIT("TTF SDL Init Failed! " << TTF_GetError(), -0x101);
 	
 	// if(Mix_Init(MIX_INIT_OGG) < 0)
 		// EXIT("Mixer Init Failed! " << Mix_GetError(), -0x101);
@@ -164,7 +165,7 @@ void quit(int code) {
 	delete Main_Resource;
 	
 	IMG_Quit(); // Quit our subsystems
-	TTF_Quit();
+	// TTF_Quit();
 	SDL_Quit();
 	
 	exit(code);

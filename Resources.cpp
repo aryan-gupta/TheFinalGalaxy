@@ -17,7 +17,7 @@
 #include "info.h"
 
 #include <iostream>
-#include <SDL_TTF.h>
+//#include <SDL_TTF.h>
 
 #include ".\inc\main.h"
 #include ".\inc\Resources.h"
@@ -46,17 +46,17 @@ Resources::Resources() {
 	
 	//fire = Mix_LoadWAV(FIRE_AUDIO);;
 	
-	mainFont = TTF_OpenFont(MAIN_FONT, 30); // Load the font
-	if(mainFont == NULL)
-		EXIT("Font Opening Failed" << TTF_GetError(), -0x20A);
+	// mainFont = TTF_OpenFont(MAIN_FONT, 30); // Load the font
+	// if(mainFont == NULL)
+		// EXIT("Font Opening Failed" << TTF_GetError(), -0x20A);
 	
-	briefFont = TTF_OpenFont(BRIEF_FONT, 19); // Load the font
-	if(briefFont == NULL)
-		EXIT("Font Opening Failed" << TTF_GetError(), -0x20A);
+	// briefFont = TTF_OpenFont(BRIEF_FONT, 19); // Load the font
+	// if(briefFont == NULL)
+		// EXIT("Font Opening Failed" << TTF_GetError(), -0x20A);
 	
-	titleFont = TTF_OpenFont(TITLE_FONT, 75); // Load the font
-	if(titleFont == NULL)
-		EXIT("Font Opening Failed" << TTF_GetError(), -0x20A);
+	// titleFont = TTF_OpenFont(TITLE_FONT, 75); // Load the font
+	// if(titleFont == NULL)
+		// EXIT("Font Opening Failed" << TTF_GetError(), -0x20A);
 	
 	spriteSheets = new SDL_Texture*[3];
 	for(int i = 0; i < 3; ++i) {
@@ -130,7 +130,7 @@ Resources::~Resources() {
 	
 	SDL_DestroyTexture(explosion);   explosion = NULL;
 	SDL_DestroyTexture(healthHeart); healthHeart = NULL;
-	TTF_CloseFont(mainFont);         mainFont = NULL;
+	//TTF_CloseFont(mainFont);         mainFont = NULL;
 	
 	delete[] clip_enemyShips;
 	delete[] clip_astroids;

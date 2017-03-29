@@ -49,7 +49,6 @@ protected:
 	/// @brief Pure virtual functions from base class
 	/// @warning Must be instantiated in derived class
 	/// @sa Thing::destroy() Thing::checkHit()
-	virtual void destroy() = 0;
 	virtual void checkHit() = 0;
 private:
 };

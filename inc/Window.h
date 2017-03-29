@@ -28,6 +28,7 @@ class Ship;
 class Player;
 class Bullet;
 class Enemy;
+class Thing;
 
 extern int SCRN_W; ///< The width of the screen
 extern int SCRN_H; ///< The height of the screen
@@ -48,12 +49,10 @@ public:
 	
 	void moveAll(uint32_t time); ///< Moves all the objects on the screen @sa Thing::render()
 	void renderAll(); ///< Renders all of the objects on the screen
-	
 	void createEnemyShip(); ///< Creates an \ref Enemy ship
-	
 	void moveCamera(); ///< Moves the camera respect the \ref Player's Movement
-	
 	void renderBackGround(); ///< Renders the background respect to the camera
+	void removeThings();
 	
 	inline SDL_Rect              getCamera();
 	inline SDL_Window*           getWindow();     ///< Get the current Window
@@ -63,6 +62,7 @@ public:
 	inline std::vector<Bullet*>& getEnemyBullets();  ///< Get the enemy's Bullet
 	inline std::vector<Bullet*>& getPlayerBullets();
 	
+	inline void addThingsToRemove(Thing* obj);
 	inline void addPlayerBullet(Bullet* bullet);    ///< Add a Player's bullet
 	inline void addEnemyBullet(Bullet* bullet);
 protected:
@@ -77,6 +77,8 @@ protected:
 	std::vector<Bullet*> enemyBullets;  ///< All the enemy's \ref Bullet
 	std::vector<Bullet*> playerBullets; ///< All the player's \ref Bullet
 	
+	std::vector<Thing*> thingsToRemove;
+	
 	Player* playerShip; /// The \ref Player's Ship
 private:
 	void clear(); ///< clear the renderer
@@ -84,38 +86,42 @@ private:
 
 inline
 SDL_Rect Window::getCamera()
-	{ return camera; }
+{ return camera; }
 
 inline
 SDL_Window* Window::getWindow()
-	{ return window; }
+{ return window; }
 
 inline
 SDL_Renderer* Window::getRenderer()
-	{ return renderer; }
+{ return renderer; }
 
 inline
 Player* Window::getPlayerShip()
-	{ return playerShip; }
+{ return playerShip; }
 
 inline
 std::vector<Enemy*>& Window::getEnemyShips()
-	{ return enemyShips; }
+{ return enemyShips; }
 	
 inline
 std::vector<Bullet*>& Window::getEnemyBullets() 
-	{ return enemyBullets; }
+{ return enemyBullets; }
 	
 inline
 std::vector<Bullet*>& Window::getPlayerBullets() 
-	{ return playerBullets; }
+{ return playerBullets; }
 	
 inline
+void Window::addThingsToRemove(Thing* obj)
+{ thingsToRemove.push_back(obj); }
+
+inline
 void Window::addPlayerBullet(Bullet* bullet)
-	{ playerBullets.push_back(bullet); }
+{ playerBullets.push_back(bullet); }
 	
 inline
 void Window::addEnemyBullet(Bullet* bullet)
-	{ enemyBullets.push_back(bullet); }
+{ enemyBullets.push_back(bullet); }
 	
 #endif

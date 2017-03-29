@@ -43,6 +43,13 @@ Ship(SPRITE_SHEET_2, 0.0) {
 		clipping.h
 	};
 	
+	shieldPosition = SDL_Rect{0, 0, shieldClipping.w, shieldClipping.h};
+	
+	shieldCenter = SDL_Point{
+		shieldClipping.w/2,
+		shieldClipping.h/2 + 10
+	};
+	
 	xPosition = position.x;
 	yPosition = position.y;
 	
@@ -50,7 +57,7 @@ Ship(SPRITE_SHEET_2, 0.0) {
 	RFcounter     = 0;
 	hasDoubleFire = false;
 	DFcounter     = 0;
-	hasShield     = false;
+	hasShield     = true;
 	shieldCounter = 0;
 }
 
@@ -104,17 +111,20 @@ void Player::setMoving(Direction direction) {
 }
 
 
-void Player::move(uint32_t time) {	
+void Player::move(uint32_t time) {
+	Thing::move(time);
+	turn(time);
+	
+	keepInMap();
+	
 	if(hasShield) {
 		double dirInRads = (360 - direction) * M_PI/180;
 		shieldPosition.x -= sin(dirInRads) * velocity * (time/1000.0);
 		shieldPosition.y -= cos(dirInRads) * velocity * (time/1000.0);
 	
 	}
-	
-	turn(time);
-	Thing::move(time);
 }
+
 
 
 void Player::render() {
@@ -122,17 +132,20 @@ void Player::render() {
 	
 	if(hasShield) {
 		shieldPosition = SDL_Rect{
-			this->position.x - (this->shieldClipping.w + this->position.w) / 2,
-			this->position.y - (this->shieldClipping.h + this->position.h) / 2,
-			this->shieldClipping.w,
-			this->shieldClipping.h
+			position.x - shieldClipping.w/2 + position.w/2,
+			position.y - shieldClipping.h/2 + position.h/2 - 10,
+			shieldClipping.w,
+			shieldClipping.h
 		};
-	
-		SDL_RenderCopy( // Draw the ship on the renderer
+		
+		SDL_RenderCopyEx( // Draw the ship on the renderer
 			Main_Window->getRenderer(),
 			this->shieldTexture,
 			&this->shieldClipping,
-			&shieldPosition
+			&shieldPosition,
+			direction,
+			&rotCenter,
+			SDL_FLIP_NONE
 		);
 	}
 }
@@ -153,13 +166,6 @@ void Player::turnOnDoubleFire() {
 void Player::turnOnShield() {
 	this->hasShield = true;
 	this->shieldCounter = 0;
-	
-	shieldPosition = SDL_Rect{
-		this->position.x - (this->shieldClipping.w + this->position.w) / 2,
-		this->position.y - (this->shieldClipping.h + this->position.h) / 2,
-		this->shieldClipping.w,
-		this->shieldClipping.h
-	};
 }
 
 
@@ -175,7 +181,16 @@ Powerup* Player::getPowerup() {
 
 
 void Player::destroy() {
-	delete this;
+	LOGL("YOU LOSE")
+	
+	clipping = Main_Resource->clip_playerShips[PLAYER_SHIP_1];
+	
+	position = SDL_Rect {
+		MAP_W/2 - clipping.w/2,
+		MAP_H/2 - clipping.h/2,
+		clipping.w,
+		clipping.h
+	};
 }
 
 
@@ -184,7 +199,7 @@ void Player::checkHit() {
 	
 	for(auto b : bullets) {
 		if(checkCollision(b->getPosition(), this->position)) {
-			b->explode();
+			//b->explode();
 			this->explode();
 		}
 	}
@@ -195,7 +210,21 @@ void Player::fire() {
 	Main_Window->addPlayerBullet(new Bullet(
 		this->direction, 
 		this->xPosition + (clipping.w / 2), 
-		this->yPosition + (clipping.h / 2),
-		PLAYER_SHIP
+		this->yPosition + (clipping.h / 2)
 	));
+}
+
+
+void Player::keepInMap() {
+	if(xPosition < 0)
+		xPosition = 0;
+	
+	if((xPosition + position.w) > MAP_W) 
+		xPosition = MAP_W - clipping.w;
+	
+	if(yPosition < 0) 
+		yPosition = 0;
+	
+	if((yPosition + position.h) > MAP_H) 
+		yPosition = MAP_H - clipping.h;
 }

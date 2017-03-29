@@ -48,6 +48,8 @@ Ship(SPRITE_SHEET_1, (rand() % 360)) {
 Enemy::~Enemy() {}
 
 void Enemy::move(uint32_t time) {
+	if(atEdgeOfMap())
+		turn(180);
 	if(rand() % FIRE_SEED == 0)
 		fire();
 	if(rand() % TURN_SEED == 0)
@@ -65,19 +67,8 @@ void Enemy::fire() {
 	Main_Window->addEnemyBullet(new Bullet(
 		this->direction, 
 		this->xPosition + (clipping.w / 2), 
-		this->yPosition + (clipping.h / 2),
-		PLAYER_SHIP
+		this->yPosition + (clipping.h / 2)
 	));
-}
-
-
-void Enemy::destroy() {
-	auto ships = Main_Window->getEnemyShips();
-	for(unsigned i = 0; i < ships.size(); ++i)
-		if(this == ships[i])
-			ships.erase(ships.begin() + i);
-			
-	delete this;
 }
 
 
@@ -86,8 +77,17 @@ void Enemy::checkHit() {
 	
 	for(auto b : bullets) {
 		if(checkCollision(b->getPosition(), this->position)) {
-			b->explode();
+			//b->explode();
 			this->explode();
 		}
 	}
+}
+
+bool Enemy::atEdgeOfMap() {
+	if(    (xPosition <= 0)
+		|| (xPosition + position.w) >= MAP_W
+		|| (yPosition <= 0) 
+		|| (yPosition + position.h) >= MAP_H 
+	) return true;
+	return false;
 }

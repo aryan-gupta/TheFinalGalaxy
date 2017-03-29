@@ -22,16 +22,16 @@
 
 class Bullet : public Thing {
 public:
-	Bullet(double direction, int x, int y, Shooters ship);
+	Bullet(double direction, int x, int y);
 	virtual ~Bullet();
 	
 	virtual void move(uint32_t time);
 	virtual void render();
 protected:
-	virtual void destroy();
+	bool atEdgeOfMap();
+	
 	virtual void checkHit();
 private:
-	Shooters whosBullet;
 };
 
 #endif

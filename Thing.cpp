@@ -68,6 +68,11 @@ void Thing::render() {
 
 
 void Thing::move(uint32_t time) {
+	if(this->explosionCounter >= 80) {
+		destroy();
+		return;
+	}
+	
 	if(isExploding) {
 		explosionCounter++;
 		return;
@@ -76,18 +81,12 @@ void Thing::move(uint32_t time) {
 	xPosition -= sin((360 - direction) * M_PI/180) * velocity * (time/1000.0);
 	yPosition -= cos((360 - direction) * M_PI/180) * velocity * (time/1000.0);
 	
-	keepInMap();
 	checkHit();
-	
-	if(explosionCounter >= 80) { // This if statement
-		destroy();
-		return;
-	}
 }
 
 
 void Thing::explode() {
-	if(isExploding) // if already exploding, dont do anything
+	if(isExploding) // if already exploding, don't do anything
 		return;
 	
 	isExploding = true;
@@ -102,17 +101,6 @@ void Thing::explode() {
 	};
 }
 
-
-void Thing::keepInMap() {
-	if(xPosition < 0)
-		xPosition = 0;
-	
-	if((xPosition + position.w) > MAP_W) 
-		xPosition = MAP_W - clipping.w;
-	
-	if(yPosition < 0) 
-		yPosition = 0;
-	
-	if((yPosition + position.h) > MAP_H) 
-		yPosition = MAP_H - clipping.h;
+void Thing::destroy() {
+	Main_Window->addThingsToRemove(this);
 }
