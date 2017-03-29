@@ -55,7 +55,8 @@ int main(int argc, char* argv[]) {
 		FPS_Timer = SDL_GetTicks();
 		
 		if(rand() % ENEMY_SEED == 0)
-			Main_Window->createEnemyShip();
+			if(Main_Window->getEnemyShip().size() < 10)
+				Main_Window->createEnemyShip();
 		
 		Main_Window->moveAll(SDL_GetTicks() - moveTimer);
 		moveTimer = SDL_GetTicks();
