@@ -38,7 +38,7 @@ Window::Window() {
 			SDL_WINDOWPOS_UNDEFINED,  // Window position (x)
 			SDL_WINDOWPOS_UNDEFINED,  // Window position (y)
 			SCRN_W, SCRN_H,  // Screen size
-			SDL_WINDOW_SHOWN // | SDL_WINDOW_FULLSCREEN // Window flags
+			SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_GRABBED // | SDL_WINDOW_FULLSCREEN // Window flags
 		))
 	) EXIT("SDL Create Window Failed! " << SDL_GetError(), -0x101);
 	
