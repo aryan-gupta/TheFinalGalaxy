@@ -38,8 +38,8 @@ extern int SCRN_H; ///< The height of the screen
 /// and more
 class Window {
 public:
-	Window();
-	~Window();
+	Window();  ///< Creates our Window
+	~Window(); ///< Destroys our Window and cleans up variables
 	
 	/// @brief initializes all the variables in our window
 	/// The variables aren't done in the constructor because many of the
@@ -48,23 +48,23 @@ public:
 	void initWindow();
 	
 	void moveAll(uint32_t time); ///< Moves all the objects on the screen @sa Thing::render()
-	void renderAll(); ///< Renders all of the objects on the screen
-	void createEnemyShip(); ///< Creates an \ref Enemy ship
-	void moveCamera(); ///< Moves the camera respect the \ref Player's Movement
-	void renderBackGround(); ///< Renders the background respect to the camera
-	void removeThings();
+	void renderAll();            ///< Renders all of the objects on the screen
+	void createEnemyShip();      ///< Creates an \ref Enemy ship
+	void moveCamera();           ///< Moves the camera respect the \ref Player's Movement
+	void renderBackGround();     ///< Renders the background respect to the camera
+	void removeThings();         ///< Removes the \ref Things from the map that we don't need
 	
-	inline SDL_Rect              getCamera();
-	inline SDL_Window*           getWindow();     ///< Get the current Window
-	inline SDL_Renderer*         getRenderer(); ///< Get the current Window's renderer
-	inline Player*               getPlayerShip();     ///< Get the Player's Ship
-	inline std::vector<Enemy* >& getEnemyShips();
-	inline std::vector<Bullet*>& getEnemyBullets();  ///< Get the enemy's Bullet
-	inline std::vector<Bullet*>& getPlayerBullets();
+	inline SDL_Rect              getCamera();        ///< Get the current camera location
+	inline SDL_Window*           getWindow();        ///< Get the current Window
+	inline SDL_Renderer*         getRenderer();      ///< Get the current Window's renderer
+	inline Player*               getPlayerShip();    ///< Get the Player's Ship
+	inline std::vector<Enemy* >& getEnemyShips();    ///< Get the \ref Enemy Ships
+	inline std::vector<Bullet*>& getEnemyBullets();  ///< Get the \ref Enemy's \ref Bullets
+	inline std::vector<Bullet*>& getPlayerBullets(); ///< Get the \ref Player's \ref Bullets
 	
-	inline void addThingsToRemove(Thing* obj);
-	inline void addPlayerBullet(Bullet* bullet);    ///< Add a Player's bullet
-	inline void addEnemyBullet(Bullet* bullet);
+	inline void addThingsToRemove(Thing* obj);   ///< Add things to remove from the board \sa Window::removeThings()
+	inline void addPlayerBullet(Bullet* bullet); ///< Add a \ref Player's \ref Bullet
+	inline void addEnemyBullet(Bullet* bullet);  ///< Adds a \ref Enemy's \ref Bullet
 protected:
 	SDL_Window* window;     ///< Stores our main Window
 	SDL_Renderer* renderer; ///< Stores our main renderer
@@ -73,15 +73,15 @@ protected:
 	
 	SDL_Rect camera; ///< Stores the location of the camera respect to MAP height and width
 	
-	std::vector<Enemy*> enemyShips;      ///< All the enemy ships
+	std::vector<Enemy*> enemyShips;     ///< All the enemy ships
 	std::vector<Bullet*> enemyBullets;  ///< All the enemy's \ref Bullet
 	std::vector<Bullet*> playerBullets; ///< All the player's \ref Bullet
 	
-	std::vector<Thing*> thingsToRemove;
+	std::vector<Thing*> thingsToRemove; ///< The things we need to remove after each frame
 	
 	Player* playerShip; /// The \ref Player's Ship
 private:
-	void clear(); ///< clear the renderer
+	void clear(); ///< Clear the renderer
 };
 
 inline
