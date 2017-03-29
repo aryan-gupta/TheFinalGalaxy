@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
 			if(Main_Window->getEnemyShipsSize() < 10)
 				Main_Window->createEnemyShip();
 			
-		if(Main_Window->getAsteroidSize() < 5)
+		if(Main_Window->getAsteroidSize() < 50)
 				Main_Window->createAsteroid();
 		
 		Main_Window->moveAll(SDL_GetTicks() - moveTimer);

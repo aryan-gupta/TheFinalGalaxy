@@ -29,6 +29,7 @@ class Player;
 class Bullet;
 class Enemy;
 class Thing;
+class Asteroid;
 
 extern int SCRN_W; ///< The width of the screen
 extern int SCRN_H; ///< The height of the screen
@@ -79,7 +80,7 @@ protected:
 	std::vector<Thing*>  enemyShips;     ///< All the enemy ships
 	std::vector<Bullet*> enemyBullets;  ///< All the enemy's \ref Bullet
 	std::vector<Bullet*> playerBullets; ///< All the player's \ref Bullet
-	std::vector<Bullet*> asteroids; ///< All the player's \ref Bullet
+	std::vector<Asteroid*> asteroids; ///< All the player's \ref Bullet
 	
 	std::vector<Thing*> thingsToRemove; ///< The things we need to remove after each frame
 	

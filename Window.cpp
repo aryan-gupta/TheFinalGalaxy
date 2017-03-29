@@ -77,6 +77,8 @@ void Window::moveAll(uint32_t time) {
 	for(auto e : enemyBullets)  e->move(time);
 	for(auto e : playerBullets) e->move(time);
 	for(auto e : enemyShips)    e->move(time);
+	for(auto e : asteroids)     e->move(time);
+	
 	// if(enemyBullets.size() > 0)
 		// for(int i = enemyBullets.size() - 1; i >= 0; --i)
 			// enemyBullets.at(i)->move(time);
@@ -102,6 +104,7 @@ void Window::renderAll() {
 	for(auto e : enemyBullets)  e->render();
 	for(auto e : playerBullets) e->render();
 	for(auto e : enemyShips)    e->render();
+	for(auto e : asteroids)     e->render();
 	
 	
 	SDL_RenderPresent(renderer);
@@ -204,6 +207,6 @@ void Window::createEnemyShip() {
 
 	
 void Window::createAsteroid() {
-	enemyShips.push_back(new Asteroid());
+	asteroids.push_back(new Asteroid());
 	//numAsteroid++;
 }
