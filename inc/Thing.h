@@ -55,7 +55,8 @@ public:
 	/// @note virtual function
 	virtual void render();
 	
-	/// @brief Move the Thing
+	/// @brief Moves the Thing based on time
+	/// @param [in] time `uint32_t` the amount of time passed from the last move call
 	/// @note virtual function
 	virtual void move(uint32_t time);
 protected:
