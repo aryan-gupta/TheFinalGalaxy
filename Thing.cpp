@@ -101,6 +101,7 @@ void Thing::explode() {
 	};
 }
 
+
 void Thing::destroy() {
 	Main_Window->addThingsToRemove(this);
 }

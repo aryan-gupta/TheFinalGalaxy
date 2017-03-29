@@ -36,8 +36,8 @@ public:
 			- \ref position
 			- \ref clipping
 	**/
-	Ship(SpriteSheets sheet, double direction);
-	virtual ~Ship(); /// Default destructor
+	Ship(SpriteSheets sheet, double direction) : Thing(sheet, direction) {}
+	virtual ~Ship() {}; /// Default destructor
 	
 	virtual void fire() = 0; ///< Fires a bullet
 	

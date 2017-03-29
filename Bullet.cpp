@@ -39,10 +39,6 @@ Thing(SPRITE_SHEET_2, direction) {
 	};
 }
 
-
-Bullet::~Bullet() { LOGL("DESTROYING") }
-
-
 void Bullet::move(uint32_t time) {
 	if(atEdgeOfMap()) {
 		destroy();

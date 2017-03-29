@@ -23,7 +23,7 @@
 class Enemy : public Ship {
 public:
 	Enemy();
-	virtual ~Enemy();
+	virtual ~Enemy() {};
 	
 	void turn(int degrees);
 	

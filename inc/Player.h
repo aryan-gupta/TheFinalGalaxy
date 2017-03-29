@@ -33,7 +33,7 @@ enum PlayerShipTypes {
 class Player : public Ship {
 public:
 	Player();  ///< Constructor for the player's Ship
-	virtual ~Player(); ///< Destructor for player's Ship
+	virtual ~Player() {}; ///< Destructor for player's Ship
 	
 	/// @brief Set the turn direction
 	/// @param [in] direction `Direction` - the direction to turn
@@ -80,7 +80,6 @@ protected:
 	Powerup* getPowerup();    ///< Gets the closest power-up to the player
 	void turn(uint32_t time); ///< turns a certain amount depending on the amount of time passed
 	
-	virtual void destroy();  ///< Removed the Player from the map
 	virtual void checkHit(); ///< Checks if a Bullet has hit it or not
 private:
 };

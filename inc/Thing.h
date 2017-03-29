@@ -41,6 +41,11 @@ public:
 
 	void explode(); ///< Explodes the current thing>
 	
+	/// @brief Destroys this thing
+	/// @warning pure virtual function - Must be defined in Base Class
+	/// Removes itself from the vectors storing the Thing then deletes it self
+	void destroy();
+	
 	/// @brief get the current position of the Thing
 	/// @return `SDL_Rect` Returns the SDL_Rect position of the current Thing
 	/// @note `inline` function
@@ -73,11 +78,6 @@ protected:
 	SDL_Texture* explosion; ///< Pointer to the texture in \ref Resources for the explosion
 	bool isExploding;       ///< Is the Thing exploding
 	int explosionCounter;   ///< Counts/times the explosion to decide which clipping to use
-	
-	/// @brief Destroys this thing
-	/// @warning pure virtual function - Must be defined in Base Class
-	/// Removes itself from the vectors storing the Thing then deletes it self
-	virtual void destroy();
 	
 	/// @brief checks if something has hit it
 	/// @warning pure virtual function - Must be defined in Base Class

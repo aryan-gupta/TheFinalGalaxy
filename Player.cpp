@@ -62,11 +62,6 @@ Ship(SPRITE_SHEET_2, 0.0) {
 }
 
 
-Player::~Player() {
-	//quit(0x44);
-}
-
-
 void Player::turn(uint32_t time) {
 	direction -= turnVelocity;
 	
@@ -126,7 +121,6 @@ void Player::move(uint32_t time) {
 }
 
 
-
 void Player::render() {
 	Thing::render();
 	
@@ -144,7 +138,7 @@ void Player::render() {
 			&this->shieldClipping,
 			&shieldPosition,
 			direction,
-			&rotCenter,
+			&shieldCenter,
 			SDL_FLIP_NONE
 		);
 	}
@@ -177,20 +171,6 @@ void Player::centerCamOverUs(int& x, int& y) {
 
 Powerup* Player::getPowerup() {
 	return nullptr;
-}
-
-
-void Player::destroy() {
-	LOGL("YOU LOSE")
-	
-	clipping = Main_Resource->clip_playerShips[PLAYER_SHIP_1];
-	
-	position = SDL_Rect {
-		MAP_W/2 - clipping.w/2,
-		MAP_H/2 - clipping.h/2,
-		clipping.w,
-		clipping.h
-	};
 }
 
 

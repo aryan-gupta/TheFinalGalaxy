@@ -23,7 +23,7 @@
 class Bullet : public Thing {
 public:
 	Bullet(double direction, int x, int y);
-	virtual ~Bullet();
+	virtual ~Bullet() {}
 	
 	virtual void move(uint32_t time);
 	virtual void render();

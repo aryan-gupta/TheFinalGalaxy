@@ -45,7 +45,6 @@ Ship(SPRITE_SHEET_1, (rand() % 360)) {
 	yPosition = position.y;
 }
 
-Enemy::~Enemy() {}
 
 void Enemy::move(uint32_t time) {
 	if(atEdgeOfMap())
@@ -53,13 +52,13 @@ void Enemy::move(uint32_t time) {
 	if(rand() % FIRE_SEED == 0)
 		fire();
 	if(rand() % TURN_SEED == 0)
-		turn((rand() % 20) - 10);
+		turn((rand() % 60) - 30);
 	Thing::move(time);
 }
 
 
 void Enemy::turn(int degrees) {
-	direction =+ degrees;
+	direction += degrees;
 }
 
 
