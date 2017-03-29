@@ -20,8 +20,6 @@
 
 #include <SDL.h>
 #include <SDL_Image.h>
-#include <SDL_Mixer.h>
-#include <SDL_TTF.h>
 
 extern const char* SPRITE_RES[];     ///< Stores all the locations of the sprite-sheets
 extern const char* EXPLOSION_RES;    ///< Stores the explosion animation sprite-sheet
@@ -53,9 +51,9 @@ struct Resources {
 	
 	SDL_Texture*  background;  ///< Stores our background texture
 	SDL_Texture*  healthHeart; ///< Stores out texture for our heart
-	TTF_Font*     mainFont;    ///< Stores the main font we will be using
-	TTF_Font*     briefFont;   ///< Stores the brief/paragraph font
-	TTF_Font*     titleFont;   ///< Stores the title font
+	//TTF_Font*     mainFont;    ///< Stores the main font we will be using
+	//TTF_Font*     briefFont;   ///< Stores the brief/paragraph font
+	//TTF_Font*     titleFont;   ///< Stores the title font
 	
 	// SPRITE SHEET 0
 	SDL_Rect* clip_enemyShips; ///< Array for all the enemy ship clippings

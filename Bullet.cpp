@@ -18,30 +18,35 @@
 
 #include <vector>
 using std::vector;
+#include <cmath>
 
 #include ".\inc\main.h"
 #include ".\inc\Bullet.h"
 #include ".\inc\Resources.h"
 #include ".\inc\Window.h"
 
-Bullet::Bullet(double direction, int x, int y, Shooters ship):
+Bullet::Bullet(double direction, int x, int y):
 Thing(SPRITE_SHEET_2, direction) {
 	this->velocity  = 750;
 	this->clipping  = Main_Resource->clip_bullets[0];
+	this->xPosition = x - (clipping.w/2);
+	this->yPosition = y - (clipping.h/2);
 	this->position  = SDL_Rect{
-		0,
-		0,
+		(int)xPosition,
+		(int)yPosition,
 		this->clipping.w,
 		this->clipping.h
 	};
-	this->xPosition = x - (clipping.w/2);
-	this->yPosition = y - (clipping.h/2);
-	
-	this->whosBullet = ship;
 }
 
+void Bullet::move(uint32_t time) {
+	if(atEdgeOfMap()) {
+		destroy();
+		return;
+	}
 
-Bullet::~Bullet() {}
+	Thing::move(time);
+}
 
 
 void Bullet::render() {
@@ -60,23 +65,16 @@ void Bullet::render() {
 	);
 }
 
-
-void Bullet::destroy() {
-	vector<Bullet*>& enemyBullets = Main_Window->getEnemyBullets();
-	for(unsigned i = 0; i < enemyBullets.size(); ++i) {
-		if(this == enemyBullets[i])
-			enemyBullets.erase(enemyBullets.begin() + i);
-	}
+void Bullet::checkHit() {
 	
-	// for(unsigned i = 0; i < Main_Window->enemyBullets.size(); ++i) {
-		// if(this == Main_Window->enemyBullets[i])
-			// Main_Window->enemyBullets.erase(Main_Window->enemyBullets.begin() + i);
-	// }
-	
-	delete this;
 }
 
 
-void Bullet::checkHit() {
-	
+bool Bullet::atEdgeOfMap() {
+	if(    (xPosition <= 0)
+		|| (xPosition + position.w) >= MAP_W
+		|| (yPosition <= 0) 
+		|| (yPosition + position.h) >= MAP_H 
+	) return true;
+	return false;
 }

@@ -23,15 +23,15 @@
 class Enemy : public Ship {
 public:
 	Enemy();
-	virtual ~Enemy();
+	virtual ~Enemy() {};
 	
 	void turn(int degrees);
 	
 	virtual void move(uint32_t time);
 	virtual void fire();
 protected:
-	virtual void destroy();
 	virtual void checkHit();
+	bool atEdgeOfMap();
 private:
 };
 

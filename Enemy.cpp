@@ -30,7 +30,7 @@ const int FIRE_SEED = 500;
 
 Enemy::Enemy():
 Ship(SPRITE_SHEET_1, (rand() % 360)) {
-	velocity = 200;
+	velocity = 250;
 	
 	clipping = Main_Resource->clip_enemyShips[0];
 	
@@ -45,19 +45,20 @@ Ship(SPRITE_SHEET_1, (rand() % 360)) {
 	yPosition = position.y;
 }
 
-Enemy::~Enemy() {}
 
 void Enemy::move(uint32_t time) {
-	Thing::move(time);
+	if(atEdgeOfMap())
+		turn(180);
 	if(rand() % FIRE_SEED == 0)
 		fire();
 	if(rand() % TURN_SEED == 0)
-		turn((rand() % 20) - 10);
+		turn((rand() % 60) - 30);
+	Thing::move(time);
 }
 
 
 void Enemy::turn(int degrees) {
-	direction =+ degrees;
+	direction += degrees;
 }
 
 
@@ -65,14 +66,8 @@ void Enemy::fire() {
 	Main_Window->addEnemyBullet(new Bullet(
 		this->direction, 
 		this->xPosition + (clipping.w / 2), 
-		this->yPosition + (clipping.h / 2),
-		PLAYER_SHIP
+		this->yPosition + (clipping.h / 2)
 	));
-}
-
-
-void Enemy::destroy() {
-	//delete this;
 }
 
 
@@ -81,8 +76,17 @@ void Enemy::checkHit() {
 	
 	for(auto b : bullets) {
 		if(checkCollision(b->getPosition(), this->position)) {
-			b->explode();
+			//b->explode();
 			this->explode();
 		}
 	}
+}
+
+bool Enemy::atEdgeOfMap() {
+	if(    (xPosition <= 0)
+		|| (xPosition + position.w) >= MAP_W
+		|| (yPosition <= 0) 
+		|| (yPosition + position.h) >= MAP_H 
+	) return true;
+	return false;
 }

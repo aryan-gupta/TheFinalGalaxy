@@ -33,7 +33,7 @@ enum PlayerShipTypes {
 class Player : public Ship {
 public:
 	Player();  ///< Constructor for the player's Ship
-	virtual ~Player(); ///< Destructor for player's Ship
+	virtual ~Player() {}; ///< Destructor for player's Ship
 	
 	/// @brief Set the turn direction
 	/// @param [in] direction `Direction` - the direction to turn
@@ -53,10 +53,11 @@ public:
 	
 	void centerCamOverUs(int& x, int& y);
 	
+	
 	/// @brief Moves based on time
 	/// @param [in] time `uint32_t` the amount of time passed from the last move call
 	virtual void move(uint32_t time);
-	
+	virtual void keepInMap();
 	virtual void fire();   ///< Fires a bullet
 	virtual void render(); ///< Renders the player
 protected:
@@ -65,6 +66,7 @@ protected:
 	SDL_Rect shieldPosition;    ///< Position of the Shield relative to the Player
 	bool hasShield;             ///< Does the Player have a Shield
 	int shieldCounter;          ///< Counter for the Player's Shield
+	SDL_Point shieldCenter;
 	
 	///@todo Change power-ups in to bool array
 	bool hasRapidFire; ///< Does the Player have Rapid Fire
@@ -78,7 +80,6 @@ protected:
 	Powerup* getPowerup();    ///< Gets the closest power-up to the player
 	void turn(uint32_t time); ///< turns a certain amount depending on the amount of time passed
 	
-	virtual void destroy();  ///< Removed the Player from the map
 	virtual void checkHit(); ///< Checks if a Bullet has hit it or not
 private:
 };

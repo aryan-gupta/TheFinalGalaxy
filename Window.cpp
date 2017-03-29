@@ -29,8 +29,8 @@ Window::Window() {
 	SDL_DisplayMode mode;
 	SDL_GetCurrentDisplayMode(0, &mode); // Get the properties of the screen
 
-	SCRN_H = mode.h;  // Set Window width
-	SCRN_W = mode.w; // Set Window width	
+	SCRN_H = mode.h - 200;  // Set Window width
+	SCRN_W = mode.w - 200; // Set Window width	
 	
 	if( NULL ==
 		(window = SDL_CreateWindow(  // Create our Window
@@ -38,7 +38,7 @@ Window::Window() {
 			SDL_WINDOWPOS_UNDEFINED,  // Window position (x)
 			SDL_WINDOWPOS_UNDEFINED,  // Window position (y)
 			SCRN_W, SCRN_H,  // Screen size
-			SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN // Window flags
+			SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_GRABBED // | SDL_WINDOW_FULLSCREEN // Window flags
 		))
 	) EXIT("SDL Create Window Failed! " << SDL_GetError(), -0x101);
 	
@@ -76,7 +76,17 @@ void Window::moveAll(uint32_t time) {
 	for(auto e : enemyBullets)  e->move(time);
 	for(auto e : playerBullets) e->move(time);
 	for(auto e : enemyShips)    e->move(time);
-	
+	// if(enemyBullets.size() > 0)
+		// for(int i = enemyBullets.size() - 1; i >= 0; --i)
+			// enemyBullets.at(i)->move(time);
+		
+	// if(playerBullets.size() > 0)
+		// for(int i = playerBullets.size() - 1; i >= 0; --i)
+			// playerBullets.at(i)->move(time);
+		
+	// if(enemyShips.size() > 0)
+		// for(int i = enemyShips.size() - 1; i >= 0; --i)
+			// enemyShips.at(i)->move(time);
 	
 }
 
@@ -91,6 +101,7 @@ void Window::renderAll() {
 	for(auto e : enemyBullets)  e->render();
 	for(auto e : playerBullets) e->render();
 	for(auto e : enemyShips)    e->render();
+	
 	
 	SDL_RenderPresent(renderer);
 }
@@ -154,4 +165,37 @@ void Window::renderBackGround() {
 			);
 		}
 	}	
+}
+
+
+void Window::removeThings() {
+	for(auto tmpThing : thingsToRemove) {
+		for(unsigned jj = 0; jj < enemyBullets.size(); ++jj) {
+			if(tmpThing == enemyBullets[jj]) {
+				delete enemyBullets[jj];
+				enemyBullets.erase(enemyBullets.begin() + jj);
+			}
+		}
+	
+		for(unsigned jj = 0; jj < playerBullets.size(); ++jj) {
+			if(tmpThing == playerBullets[jj]) {
+				delete playerBullets[jj];
+				playerBullets.erase(playerBullets.begin() + jj);
+			}
+		}
+		
+		for(unsigned jj = 0; jj < enemyShips.size(); ++jj) {
+			if(tmpThing == enemyShips[jj]) {
+				delete enemyShips[jj];
+				enemyShips.erase(enemyShips.begin() + jj);
+			}
+		}
+		
+		if(tmpThing == playerShip) {
+			delete playerShip;
+			playerShip = new Player();
+		}
+	}
+	
+	thingsToRemove.clear();
 }
