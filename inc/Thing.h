@@ -21,6 +21,7 @@
 #include <SDL.h>
 
 #include ".\main.h"
+#include ".\Resources.h"
 
 /// @brief A object on the screen
 /// A abstract base class used to derive classes that can be rendered on the screen. 

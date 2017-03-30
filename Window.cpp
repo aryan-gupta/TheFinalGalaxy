@@ -24,6 +24,7 @@
 #include ".\inc\Player.h"
 #include ".\inc\Bullet.h"
 #include ".\inc\Enemy.h"
+#include ".\inc\Asteroid.h"
 
 Window::Window() {
 	SDL_DisplayMode mode;
@@ -76,6 +77,8 @@ void Window::moveAll(uint32_t time) {
 	for(auto e : enemyBullets)  e->move(time);
 	for(auto e : playerBullets) e->move(time);
 	for(auto e : enemyShips)    e->move(time);
+	for(auto e : asteroids)     e->move(time);
+	
 	// if(enemyBullets.size() > 0)
 		// for(int i = enemyBullets.size() - 1; i >= 0; --i)
 			// enemyBullets.at(i)->move(time);
@@ -101,6 +104,7 @@ void Window::renderAll() {
 	for(auto e : enemyBullets)  e->render();
 	for(auto e : playerBullets) e->render();
 	for(auto e : enemyShips)    e->render();
+	for(auto e : asteroids)     e->render();
 	
 	
 	SDL_RenderPresent(renderer);
@@ -110,11 +114,6 @@ void Window::renderAll() {
 void Window::clear() {
 	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF); // Black
 	SDL_RenderClear(renderer);
-}
-
-
-void Window::createEnemyShip() { 
-	enemyShips.push_back(new Enemy());
 }
 
 
@@ -191,6 +190,13 @@ void Window::removeThings() {
 			}
 		}
 		
+		for(unsigned jj = 0; jj < asteroids.size(); ++jj) {
+			if(tmpThing == asteroids[jj]) {
+				delete asteroids[jj];
+				asteroids.erase(asteroids.begin() + jj);
+			}
+		}
+		
 		if(tmpThing == playerShip) {
 			delete playerShip;
 			playerShip = new Player();
@@ -198,4 +204,16 @@ void Window::removeThings() {
 	}
 	
 	thingsToRemove.clear();
+}
+
+	
+void Window::createEnemyShip() {
+	enemyShips.push_back(new Enemy());
+	//numEnemyShip++;
+}
+
+	
+void Window::createAsteroid() {
+	asteroids.push_back(new Asteroid());
+	//numAsteroid++;
 }
