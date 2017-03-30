@@ -16,9 +16,14 @@
  */
 #include "info.h"
 
+#include <vector>
+using std::vector;
+
 #include ".\inc\main.h"
 #include ".\inc\Asteroid.h"
 #include ".\inc\Resources.h"
+#include ".\inc\Bullet.h"
+#include ".\inc\Window.h"
 
 
 Asteroid::Asteroid() : Thing(SPRITE_SHEET_1, rand() % 360){
@@ -35,5 +40,17 @@ Asteroid::Asteroid() : Thing(SPRITE_SHEET_1, rand() % 360){
 
 
 void Asteroid::checkHit() {
+	for(auto b : Main_Window->getPlayerBullets()) {
+		if(checkCollision(b->getPosition(), this->position)) {
+			//b->explode();
+			this->explode();
+		}
+	}
 	
+	for(auto b : Main_Window->getEnemyBullets()) {
+		if(checkCollision(b->getPosition(), this->position)) {
+			//b->explode();
+			this->explode();
+		}
+	}
 }

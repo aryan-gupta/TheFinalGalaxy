@@ -60,8 +60,8 @@ public:
 	inline SDL_Window*    getWindow();         ///< Get the current Window
 	inline SDL_Renderer*  getRenderer();       ///< Get the current Window's renderer
 	inline Player*        getPlayerShip();     ///< Get the Player's Ship
-	inline int            getEnemyShipsSize(); ///< Get the \ref Enemy Ships
 	inline int            getAsteroidSize();   ///< Get the \ref Enemy Ships
+	inline int            getEnemyShipsSize(); ///< Get the \ref Enemy Ships
 	
 	inline std::vector<Bullet*>& getEnemyBullets();   ///< Get the \ref Enemy's \ref Bullets
 	inline std::vector<Bullet*>& getPlayerBullets();  ///< Get the \ref Player's \ref Bullets

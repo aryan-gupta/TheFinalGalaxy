@@ -30,7 +30,7 @@ Thing::Thing(SpriteSheets sheet, double direction) {
 	this->texture = Main_Resource->spriteSheets[sheet];
 	// xPosition will be instantiated in derived class
 	// yPosition will be instantiated in derived class
-	this->velocity  = 0.0;
+	this->velocity  = 0.1;
 	// position will be instantiated in derived class
 	// clipping will be instantiated in derived class
 	this->direction = direction;
