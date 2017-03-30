@@ -60,6 +60,8 @@ Ship(SPRITE_SHEET_2, 0.0) {
 	DFcounter     = 0;
 	hasShield     = false;
 	shieldCounter = 0;
+	
+	direction = NOT_MOVING;
 }
 
 
@@ -83,7 +85,7 @@ void Player::setTurn(Direction direction) {
 			turnVelocity = -TURN_VELOCITY;
 		break;
 		
-		default:
+		default: 
 			turnVelocity = 0;
 		break;
 	}
@@ -101,7 +103,7 @@ void Player::setMoving(Direction direction) {
 		break;
 		
 		default:
-			velocity = 0;
+			isSlowingDown = true;
 		break;
 	}
 }
@@ -116,6 +118,17 @@ void Player::move(uint32_t time) {
 		return;
 	}
 	
+	if(isSlowingDown) {
+		if(velocity > 0)
+			velocity -= 5;
+		if(velocity < 0)
+			velocity += 5;
+		
+		if(velocity > -10 && velocity < 10) {
+			velocity = 0;
+			isSlowingDown = false;
+		}
+	}
 	
 	Thing::move(time);
 	keepInMap();

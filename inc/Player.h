@@ -18,6 +18,7 @@
 #ifndef PLAYER_H_INC
 #define PLAYER_H_INC
 
+#include ".\main.h"
 #include ".\Ship.h"
 class Powerup;
 class Asteroid;
@@ -70,6 +71,8 @@ protected:
 	bool hasShield;             ///< Does the Player have a Shield
 	int shieldCounter;          ///< Counter for the Player's Shield
 	SDL_Point shieldCenter;     ///< The shield's center (for rendering the shield)
+	
+	bool isSlowingDown;
 	
 	///@todo Change power-ups in to bool array and enums
 	bool hasRapidFire; ///< Does the Player have Rapid Fire

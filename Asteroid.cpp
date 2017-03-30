@@ -27,9 +27,9 @@ using std::vector;
 
 
 Asteroid::Asteroid() : Thing(SPRITE_SHEET_1, rand() % 360){
-	clipping = Main_Resource->clip_astroids[rand() % 20];
+	clipping = Main_Resource->clip_astroids[rand() % 20]; // randomizes the asteroid
 	position = SDL_Rect {
-		rand() % (MAP_W - clipping.w),
+		rand() % (MAP_W - clipping.w),  // randomize the position of the asteroid
 		rand() % (MAP_H - clipping.h),
 		clipping.w,
 		clipping.h
@@ -40,16 +40,16 @@ Asteroid::Asteroid() : Thing(SPRITE_SHEET_1, rand() % 360){
 
 
 void Asteroid::move(uint32_t time) {
-	velocity -= 5;
-	if(velocity < 0)
-		velocity = 0;
+	velocity -= 5; // Slow down the Asteroid by 5 each frame
+	if(velocity < 0.1) // Make sure the velocity isn't negative
+		velocity = 0.1;
 	
-	Thing::move(time);
-	keepInMap();
+	Thing::move(time); // Move the Asteroid if velocity is 
+	keepInMap(); // Keep the Asteroid in the map
 }
 
 
-void Asteroid::render() {
+void Asteroid::render() { // Not using Thing::move() because we need to keep initial rotation
 	if(isExploding) {
 		clipping.x = (explosionCounter % 9) * 100;
 		clipping.y = (explosionCounter / 9) * 100;
@@ -69,6 +69,7 @@ void Asteroid::render() {
 
 
 void Asteroid::checkHit() {
+	// Check hits with Player bullets
 	for(auto b : Main_Window->getPlayerBullets()) {
 		if(checkCollision(b->getPosition(), this->position)) {
 			//b->explode();
@@ -76,6 +77,7 @@ void Asteroid::checkHit() {
 		}
 	}
 	
+	// Check hits with Enemy bullets
 	for(auto b : Main_Window->getEnemyBullets()) {
 		if(checkCollision(b->getPosition(), this->position)) {
 			//b->explode();
@@ -87,7 +89,7 @@ void Asteroid::checkHit() {
 
 void Asteroid::moveAsteroid(double direction, double velocity) {
 	this->direction = direction;
-	this->velocity = velocity + 2.5;
+	this->velocity = velocity + 2.5; // Increase the velocity
 }
 
 
