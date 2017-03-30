@@ -85,11 +85,6 @@ void Asteroid::checkHit() {
 }
 
 
-SDL_Rect& Asteroid::getPosition() {
-	return position;
-}
-
-
 void Asteroid::moveAsteroid(double direction, double velocity) {
 	this->direction = direction;
 	this->velocity = velocity + 2.5;
