@@ -48,6 +48,7 @@ void Asteroid::move(uint32_t time) {
 	keepInMap();
 }
 
+
 void Asteroid::render() {
 	if(isExploding) {
 		clipping.x = (explosionCounter % 9) * 100;
@@ -65,6 +66,7 @@ void Asteroid::render() {
 		&position
 	);
 }
+
 
 void Asteroid::checkHit() {
 	for(auto b : Main_Window->getPlayerBullets()) {
@@ -92,6 +94,7 @@ void Asteroid::moveAsteroid(double direction, double velocity) {
 	this->direction = direction;
 	this->velocity = velocity + 2.5;
 }
+
 
 void Asteroid::keepInMap() {
 	if(xPosition < 0)

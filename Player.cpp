@@ -28,7 +28,7 @@ using std::vector;
 #include ".\inc\Asteroid.h"
 
 const double TURN_VELOCITY = 5.0;
-const double VELOCITY = 400.0; // 10px per second
+const double VELOCITY = 400.0;
 
 Player::Player():
 Ship(SPRITE_SHEET_2, 0.0) {
