@@ -26,10 +26,16 @@ public:
 	virtual ~Asteroid() {}
 	
 	SDL_Rect& getPosition();
+	void moveAsteroid(double direction, double velocity);
+	
+	virtual void move(uint32_t time);
+	virtual void render();
 protected:
 	/// @brief checks if something has hit it
 	/// @warning pure virtual function - Must be defined in Base Class
 	virtual void checkHit();
+	
+	void keepInMap();
 private:
 };
 

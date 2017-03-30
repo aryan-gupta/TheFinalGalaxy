@@ -20,6 +20,7 @@
 
 #include ".\Ship.h"
 class Powerup;
+class Asteroid;
 
 extern const double VELOCITY; //< Stores the velocity of the Player
 
@@ -70,6 +71,9 @@ protected:
 	int shieldCounter;          ///< Counter for the Player's Shield
 	SDL_Point shieldCenter;
 	
+	bool foundAsteroid;
+	double asteroidDirection;
+	
 	///@todo Change power-ups in to bool array and enums
 	bool hasRapidFire; ///< Does the Player have Rapid Fire
 	int RFcounter;     ///< Counter for Rapid fire
@@ -81,7 +85,7 @@ protected:
 	
 	Powerup* getPowerup();    ///< Gets the closest power-up to the player
 	void turn(uint32_t time); ///< turns a certain amount depending on the amount of time passed
-	bool collisionWithAsteroid();
+	bool collisionWithAsteroid(Asteroid*& ast);
 	virtual void checkHit(); ///< Checks if a Bullet has hit it or not
 private:
 };

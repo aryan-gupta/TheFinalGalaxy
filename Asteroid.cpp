@@ -39,6 +39,33 @@ Asteroid::Asteroid() : Thing(SPRITE_SHEET_1, rand() % 360){
 }
 
 
+void Asteroid::move(uint32_t time) {
+	velocity -= 5;
+	if(velocity < 0)
+		velocity = 0;
+	
+	Thing::move(time);
+	keepInMap();
+}
+
+void Asteroid::render() {
+	if(isExploding) {
+		clipping.x = (explosionCounter % 9) * 100;
+		clipping.y = (explosionCounter / 9) * 100;
+	}
+	
+	// Get position of player RELATIVE to camera
+	position.x = xPosition - Main_Window->getCamera().x;
+	position.y = yPosition - Main_Window->getCamera().y;
+	
+	SDL_RenderCopy(
+		Main_Window->getRenderer(),
+		texture,
+		&clipping,
+		&position
+	);
+}
+
 void Asteroid::checkHit() {
 	for(auto b : Main_Window->getPlayerBullets()) {
 		if(checkCollision(b->getPosition(), this->position)) {
@@ -55,6 +82,27 @@ void Asteroid::checkHit() {
 	}
 }
 
+
 SDL_Rect& Asteroid::getPosition() {
 	return position;
+}
+
+
+void Asteroid::moveAsteroid(double direction, double velocity) {
+	this->direction = direction;
+	this->velocity = velocity + 2.5;
+}
+
+void Asteroid::keepInMap() {
+	if(xPosition < 0)
+		xPosition = 0;
+	
+	if((xPosition + position.w) > MAP_W) 
+		xPosition = MAP_W - clipping.w;
+	
+	if(yPosition < 0) 
+		yPosition = 0;
+	
+	if((yPosition + position.h) > MAP_H) 
+		yPosition = MAP_H - clipping.h;
 }

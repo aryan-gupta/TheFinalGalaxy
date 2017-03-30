@@ -108,14 +108,16 @@ void Player::setMoving(Direction direction) {
 
 
 void Player::move(uint32_t time) {
-	if(collisionWithAsteroid()) {
-		xPosition += sin((360 - direction) * M_PI/180) * velocity * (time/1000.0);
-		yPosition += cos((360 - direction) * M_PI/180) * velocity * (time/1000.0);
+	turn(time);
+	
+	Asteroid* cAsteroid = NULL;
+	if(collisionWithAsteroid(cAsteroid)) {
+		cAsteroid->moveAsteroid(direction, velocity);
 		return;
 	}
 	
+	
 	Thing::move(time);
-	turn(time);
 	keepInMap();
 	
 	if(hasShield) {
@@ -214,11 +216,14 @@ void Player::keepInMap() {
 }
 
 
-bool Player::collisionWithAsteroid() {
-	for(auto a : Main_Window->getAsteroids()) {
-		if(checkCollision(a->getPosition(), this->position))
+bool Player::collisionWithAsteroid(Asteroid*& ast) {
+	for(Asteroid* a : Main_Window->getAsteroids()) {
+		if(checkCollision(a->getPosition(), this->position)) {
+			ast = a;
 			return true;
+		}
 	}
 	
+	ast = NULL;
 	return false;
 }

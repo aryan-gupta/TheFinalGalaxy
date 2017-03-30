@@ -96,8 +96,8 @@ void Thing::explode() {
 	clipping = SDL_Rect{
 		0, 
 		0, 
-		clipping.w, 
-		clipping.w
+		100, 
+		100
 	};
 }
 
