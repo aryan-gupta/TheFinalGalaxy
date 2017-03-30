@@ -20,6 +20,7 @@
 
 #include ".\Ship.h"
 class Powerup;
+class Asteroid;
 
 extern const double VELOCITY; //< Stores the velocity of the Player
 
@@ -51,8 +52,10 @@ public:
 	void turnOnDoubleFire(); ///< Turns on double fire
 	void turnOnShield();     ///< Turns on shield
 	
+	/// @brief Centers the camera over us
+	/// @param [out] `int&` The x coordinate to store the new Camera x position
+	/// @param [out] `int&` The y coordinate to store the new Camera y position
 	void centerCamOverUs(int& x, int& y);
-	
 	
 	/// @brief Moves based on time
 	/// @param [in] time `uint32_t` the amount of time passed from the last move call
@@ -68,7 +71,10 @@ protected:
 	int shieldCounter;          ///< Counter for the Player's Shield
 	SDL_Point shieldCenter;
 	
-	///@todo Change power-ups in to bool array
+	bool foundAsteroid;
+	double asteroidDirection;
+	
+	///@todo Change power-ups in to bool array and enums
 	bool hasRapidFire; ///< Does the Player have Rapid Fire
 	int RFcounter;     ///< Counter for Rapid fire
 	
@@ -79,7 +85,7 @@ protected:
 	
 	Powerup* getPowerup();    ///< Gets the closest power-up to the player
 	void turn(uint32_t time); ///< turns a certain amount depending on the amount of time passed
-	
+	bool collisionWithAsteroid(Asteroid*& ast);
 	virtual void checkHit(); ///< Checks if a Bullet has hit it or not
 private:
 };

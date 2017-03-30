@@ -25,6 +25,7 @@ using std::vector;
 #include ".\inc\Player.h"
 #include ".\inc\Window.h"
 #include ".\inc\Bullet.h"
+#include ".\inc\Asteroid.h"
 
 const double TURN_VELOCITY = 5.0;
 const double VELOCITY = 400.0; // 10px per second
@@ -57,7 +58,7 @@ Ship(SPRITE_SHEET_2, 0.0) {
 	RFcounter     = 0;
 	hasDoubleFire = false;
 	DFcounter     = 0;
-	hasShield     = true;
+	hasShield     = false;
 	shieldCounter = 0;
 }
 
@@ -107,9 +108,16 @@ void Player::setMoving(Direction direction) {
 
 
 void Player::move(uint32_t time) {
-	Thing::move(time);
 	turn(time);
 	
+	Asteroid* cAsteroid = NULL;
+	if(collisionWithAsteroid(cAsteroid)) {
+		cAsteroid->moveAsteroid(direction, velocity);
+		return;
+	}
+	
+	
+	Thing::move(time);
 	keepInMap();
 	
 	if(hasShield) {
@@ -174,10 +182,8 @@ Powerup* Player::getPowerup() {
 }
 
 
-void Player::checkHit() {
-	vector<Bullet*>& bullets = Main_Window->getEnemyBullets();
-	
-	for(auto b : bullets) {
+void Player::checkHit() {	
+	for(auto b : Main_Window->getEnemyBullets()) {
 		if(checkCollision(b->getPosition(), this->position)) {
 			//b->explode();
 			this->explode();
@@ -207,4 +213,17 @@ void Player::keepInMap() {
 	
 	if((yPosition + position.h) > MAP_H) 
 		yPosition = MAP_H - clipping.h;
+}
+
+
+bool Player::collisionWithAsteroid(Asteroid*& ast) {
+	for(Asteroid* a : Main_Window->getAsteroids()) {
+		if(checkCollision(a->getPosition(), this->position)) {
+			ast = a;
+			return true;
+		}
+	}
+	
+	ast = NULL;
+	return false;
 }
