@@ -38,9 +38,8 @@ L_SDLS = -lmingw32 -lSDL2main -lSDL2  -mwindows  -Wl,--no-undefined -lm -ldinput
 # ==============================  MACROS  ======================================
 CFLAGS = $(DEBUG) -Wall -std=c++17 -c
 LFLAGS = $(DEBUG) -Wall
-OS = $(OBJ)\main.o $(OBJ)\res.o $(OBJ)\Ship.o $(OBJ)\Window.o \
-		$(OBJ)\Resources.o $(OBJ)\Thing.o $(OBJ)\Player.o $(OBJ)\Bullet.o \
-		$(OBJ)\Enemy.o 
+OS = $(OBJ)\main.o $(OBJ)\res.o $(OBJ)\Window.o $(OBJ)\Enemy.o $(OBJ)\Asteroid.o \
+		$(OBJ)\Resources.o $(OBJ)\Thing.o $(OBJ)\Player.o $(OBJ)\Bullet.o
 #		$(OBJ)\Powerup.o
 
 # ============================ RECEM_PIES ========================================
@@ -48,28 +47,28 @@ OS = $(OBJ)\main.o $(OBJ)\res.o $(OBJ)\Ship.o $(OBJ)\Window.o \
 $(OBJ)\main.o: .\main.cpp $(H)\main.h $(H)\Thing.h $(H)\Ship.h $(H)\Player.h $(H)\Window.h $(H)\Resources.h
 	$(CC) .\main.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
 
-$(OBJ)\Thing.o: .\Thing.cpp $(H)\Thing.h
+$(OBJ)\Thing.o: .\Thing.cpp $(H)\Thing.h $(H)\main.h
 	$(CC) .\Thing.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
+	
+$(OBJ)\Asteroid.o: .\Asteroid.cpp $(H)\Asteroid.h $(H)\main.h
+	$(CC) .\Asteroid.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
 
-$(OBJ)\Ship.o: .\Ship.cpp $(H)\Ship.h $(H)\Thing.h
-	$(CC) .\Ship.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
-
-$(OBJ)\Player.o: .\Player.cpp $(H)\Player.h $(H)\Ship.h $(H)\Thing.h
+$(OBJ)\Player.o: .\Player.cpp $(H)\Player.h $(H)\main.h $(H)\Ship.h $(H)\Thing.h
 	$(CC) .\Player.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
 	
-$(OBJ)\Enemy.o: .\Enemy.cpp $(H)\Enemy.h $(H)\Ship.h $(H)\Thing.h
+$(OBJ)\Enemy.o: .\Enemy.cpp $(H)\Enemy.h $(H)\main.h $(H)\Ship.h $(H)\Thing.h
 	$(CC) .\Enemy.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
 	
-$(OBJ)\Window.o: .\Window.cpp $(H)\Window.h
+$(OBJ)\Window.o: .\Window.cpp $(H)\Window.h $(H)\main.h
 	$(CC) .\Window.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
 
-$(OBJ)\Bullet.o: .\Bullet.cpp $(H)\Bullet.h $(H)\Thing.h
+$(OBJ)\Bullet.o: .\Bullet.cpp $(H)\Bullet.h $(H)\main.h $(H)\Thing.h
 	$(CC) .\Bullet.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
 
-$(OBJ)\Powerup.o: .\Powerup.cpp $(H)\Powerup.h $(H)\Thing.h
+$(OBJ)\Powerup.o: .\Powerup.cpp $(H)\Powerup.h $(H)\main.h $(H)\Thing.h
 	$(CC) .\Powerup.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
 
-$(OBJ)\Resources.o: .\Resources.cpp $(H)\Resources.h
+$(OBJ)\Resources.o: .\Resources.cpp $(H)\Resources.h $(H)\main.h
 	$(CC) .\Resources.cpp -o .\$@ $(CFLAGS) $(L_SDLC)
 	
 $(OBJ)\%.o: .\%.cpp

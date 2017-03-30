@@ -47,13 +47,16 @@ Ship(SPRITE_SHEET_1, (rand() % 360)) {
 
 
 void Enemy::move(uint32_t time) {
+	Thing::move(time);
+	
 	if(atEdgeOfMap())
 		turn(180);
+	
 	if(rand() % FIRE_SEED == 0)
 		fire();
+	
 	if(rand() % TURN_SEED == 0)
 		turn((rand() % 60) - 30);
-	Thing::move(time);
 }
 
 
@@ -72,9 +75,7 @@ void Enemy::fire() {
 
 
 void Enemy::checkHit() {
-	vector<Bullet*>& bullets = Main_Window->getPlayerBullets();
-	
-	for(auto b : bullets) {
+	for(auto b : Main_Window->getPlayerBullets()) {
 		if(checkCollision(b->getPosition(), this->position)) {
 			//b->explode();
 			this->explode();
