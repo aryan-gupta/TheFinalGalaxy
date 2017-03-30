@@ -20,22 +20,29 @@
 
 #include ".\Thing.h"
 
+/// @brief an Asteroid
 class Asteroid : public Thing {
 public: 
-	Asteroid();
-	virtual ~Asteroid() {}
+	Asteroid(); ///< @brief Default constructor
+	virtual ~Asteroid() {} ///< Default destructor
 	
-	SDL_Rect& getPosition();
+	///< Sets the movement of the the asteroid
 	void moveAsteroid(double direction, double velocity);
 	
+	/// @brief Moves the Thing based on time
+	/// @param [in] time `uint32_t` the amount of time passed from the last move call
+	/// @note virtual function
 	virtual void move(uint32_t time);
+	
+	/// @brief Render the Thing
+	/// @note virtual function
 	virtual void render();
 protected:
+	void keepInMap(); ///< Keeps the Asteroid in the map
+	
 	/// @brief checks if something has hit it
 	/// @warning pure virtual function - Must be defined in Base Class
 	virtual void checkHit();
-	
-	void keepInMap();
 private:
 };
 
