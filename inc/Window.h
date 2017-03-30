@@ -53,18 +53,19 @@ public:
 	void moveCamera();           ///< Moves the camera respect the \ref Player's Movement
 	void renderBackGround();     ///< Renders the background respect to the camera
 	void removeThings();         ///< Removes the \ref Things from the map that we don't need
-	void createEnemyShip();               ///< Creates an \ref Enemy ship
-	void createAsteroid();                 ///< Creates an \ref Asteroid ship
+	void createEnemyShip();      ///< Creates an \ref Enemy ship 
+	void createAsteroid();       ///< Creates an \ref Asteroid ship
 	
 	inline SDL_Rect       getCamera();         ///< Get the current camera location
 	inline SDL_Window*    getWindow();         ///< Get the current Window
 	inline SDL_Renderer*  getRenderer();       ///< Get the current Window's renderer
 	inline Player*        getPlayerShip();     ///< Get the Player's Ship
-	inline int            getAsteroidSize();   ///< Get the \ref Enemy Ships
+	inline int            getAsteroidsSize();   ///< Get the \ref Enemy Ships
 	inline int            getEnemyShipsSize(); ///< Get the \ref Enemy Ships
 	
-	inline std::vector<Bullet*>& getEnemyBullets();   ///< Get the \ref Enemy's \ref Bullets
-	inline std::vector<Bullet*>& getPlayerBullets();  ///< Get the \ref Player's \ref Bullets
+	inline std::vector<Bullet  *>& getEnemyBullets();   ///< Get the \ref Enemy's \ref Bullets
+	inline std::vector<Bullet  *>& getPlayerBullets();  ///< Get the \ref Player's \ref Bullets
+	inline std::vector<Asteroid*>& getAsteroids();
 	
 	inline void addThingsToRemove(Thing* obj);   ///< Add things to remove from the board \sa Window::removeThings()
 	inline void addPlayerBullet(Bullet* bullet); ///< Add a \ref Player's \ref Bullet
@@ -77,10 +78,10 @@ protected:
 	
 	SDL_Rect camera; ///< Stores the location of the camera respect to MAP height and width
 	
-	std::vector<Thing*>  enemyShips;     ///< All the enemy ships
+	std::vector<Thing*>  enemyShips;    ///< All the enemy ships
 	std::vector<Bullet*> enemyBullets;  ///< All the enemy's \ref Bullet
 	std::vector<Bullet*> playerBullets; ///< All the player's \ref Bullet
-	std::vector<Asteroid*> asteroids; ///< All the player's \ref Bullet
+	std::vector<Asteroid*> asteroids;   ///< All the player's \ref Bullet
 	
 	std::vector<Thing*> thingsToRemove; ///< The things we need to remove after each frame
 	
@@ -110,8 +111,12 @@ int Window::getEnemyShipsSize()
 { return enemyShips.size(); }
 
 inline
-int Window::getAsteroidSize()
+int Window::getAsteroidsSize()
 { return asteroids.size(); }
+
+inline
+std::vector<Asteroid*>& Window::getAsteroids()
+{ return asteroids; }
 	
 inline
 std::vector<Bullet*>& Window::getEnemyBullets() 

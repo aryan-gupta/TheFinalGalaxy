@@ -190,6 +190,13 @@ void Window::removeThings() {
 			}
 		}
 		
+		for(unsigned jj = 0; jj < asteroids.size(); ++jj) {
+			if(tmpThing == asteroids[jj]) {
+				delete asteroids[jj];
+				asteroids.erase(asteroids.begin() + jj);
+			}
+		}
+		
 		if(tmpThing == playerShip) {
 			delete playerShip;
 			playerShip = new Player();

@@ -54,3 +54,7 @@ void Asteroid::checkHit() {
 		}
 	}
 }
+
+SDL_Rect& Asteroid::getPosition() {
+	return position;
+}

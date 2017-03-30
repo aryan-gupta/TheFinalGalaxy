@@ -81,7 +81,7 @@ protected:
 	
 	Powerup* getPowerup();    ///< Gets the closest power-up to the player
 	void turn(uint32_t time); ///< turns a certain amount depending on the amount of time passed
-	
+	bool collisionWithAsteroid();
 	virtual void checkHit(); ///< Checks if a Bullet has hit it or not
 private:
 };

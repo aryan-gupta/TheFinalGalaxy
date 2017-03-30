@@ -24,6 +24,8 @@ class Asteroid : public Thing {
 public: 
 	Asteroid();
 	virtual ~Asteroid() {}
+	
+	SDL_Rect& getPosition();
 protected:
 	/// @brief checks if something has hit it
 	/// @warning pure virtual function - Must be defined in Base Class
