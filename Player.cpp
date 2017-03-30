@@ -110,13 +110,17 @@ void Player::setMoving(Direction direction) {
 
 
 void Player::move(uint32_t time) {
-	turn(time);
-	
-	Asteroid* cAsteroid = NULL;
-	if(collisionWithAsteroid(cAsteroid)) {
-		cAsteroid->moveAsteroid(direction, velocity);
-		return;
+	if(!isExploding) {
+		turn(time);
+		
+		Asteroid* cAsteroid = NULL;
+		if(collisionWithAsteroid(cAsteroid)) {
+			cAsteroid->moveAsteroid(direction, velocity);
+			return;
+		}
 	}
+	
+	Thing::move(time);
 	
 	if(isSlowingDown) {
 		if(velocity > 0)
@@ -130,7 +134,6 @@ void Player::move(uint32_t time) {
 		}
 	}
 	
-	Thing::move(time);
 	keepInMap();
 	
 	if(hasShield) {
