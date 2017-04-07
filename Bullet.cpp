@@ -50,9 +50,16 @@ void Bullet::move(uint32_t time) {
 
 
 void Bullet::render() {
+	SDL_Rect cam = Main_Window->getCamera();
+	if(    xPosition + position.w < cam.x
+		|| yPosition + position.h < cam.y
+		|| xPosition > cam.x + cam.w
+		|| yPosition > cam.y + cam.h
+	) return;
+	
 	// Get position of player RELATIVE to camera
-	position.x = xPosition - Main_Window->getCamera().x;
-	position.y = yPosition - Main_Window->getCamera().y;
+	position.x = xPosition - cam.x;
+	position.y = yPosition - cam.y;
 	
 	SDL_RenderCopyEx(
 		Main_Window->getRenderer(),
